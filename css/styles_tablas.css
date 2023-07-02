@@ -1,0 +1,19 @@
+#app {
+  padding: 20px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.8s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.list-move {
+  transition: transform 0.5s;
+}
+.item-row {
+  display: table-row;
+}
+
