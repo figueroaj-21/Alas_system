@@ -6,17 +6,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="./css/styles_login.css" rel="stylesheet">
+
 </head>
 <body>
   <div class="login-box">
     <h2>Login</h2>
-    <form action="./php/login.php" method="POST">
+    <form id="loginForm" name="loginForm" action="./php/Login.php" method="POST">
       <div class="user-box">
-        <input type="text" name="usuario" required id="usuario">
+        <input type="text" name="usuario" id="usuario">
         <label>Usuario</label>
       </div>
       <div class="user-box">
-        <input type="password" name="password" required id="password">
+        <input type="password" name="password" id="password">
         <label>Password</label>
       </div>
       <a>
@@ -25,11 +26,14 @@
         <span></span>
         <span></span>
         Entrar
-        <input type="submit" name="" value="enviar">
       </a>
-      
+      <input type="submit" name="" value="Enviar">
     </form>
 
   </div>
+
+
+  <script src="./jquery-3.6.1/jquery-3.6.1.min.js"></script>
+  <script src="./js/validar_login_jquery.js"></script>
 </body>
 </html>

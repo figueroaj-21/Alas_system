@@ -1,6 +1,7 @@
 <?php require "../php/seguridad.php";  
   require "../php/conexion.php";
-  $nombre = $_SESSION['nombre_usuario'];
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
 ?>
 <?php
 /**
@@ -43,12 +44,16 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="../css/styles_nav.css" rel="stylesheet">
-   <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
+
+  <!-- Botones -->
+    <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
+     <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
 
     <!-- Enlaces a Bootstrap 4 -->
-    <link rel="stylesheet" href="./Bootstrap-4-4.1.1/css/bootstrap.min.css" />
-    <script src="./Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
+        <script src="./Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Enlace a Bootstrap web-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <!-- Enlaces a DataTables CSS y JS -->
     <link rel="stylesheet" href="./datatables.min.css" />
@@ -102,18 +107,22 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
     <style>
       div.container {
-        margin-top: 17px;
+        margin-top: 80px;
         max-width: 1200px;
       }
     </style>
 </head>
 <body>
 
-  <?php require "../html/nav.html"; ?>
+  <?php require "../html/nav2.html"; ?>
 
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
         <h1>Productos</h1>
+        <br>
+        <a href="registro_usuario.php" class="btn btn-primary">Nuevo Producto
+        <i class="fa fa-plus"></i></a>
+        <hr>
 
         <table
           id="tbl_usuarios"
@@ -127,6 +136,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <th>Descripcion</th>
               <th>Costo</th>
               <th>Exitencia</th>
+              <td>Acciones</td>
             </tr>
           </thead>
 
@@ -137,6 +147,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <th>Descripcion</th>
               <th>Costo</th>
               <th>Existencia</th>
+              <th>Acciones</th>
             </tr>
           </tfoot>
 
@@ -152,6 +163,8 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_der"><?php echo $row_factura['descripcion']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['costo']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['existencia']; ?></td>
+                            <td class="fila_datos texto_izq"><a class="btn btn-warning" href="editar_user.php?id=<?php echo $fila['id']?> "><i class="fa-regular fa-square-plus"></i></a>
+                            <a class="btn btn-danger" href="eliminar_user.php?id=<?php echo $fila['id']?>"><i class="fa-solid fa-user-minus"></i></a></td>
                         </tr>
                         <?php
                         $i++;

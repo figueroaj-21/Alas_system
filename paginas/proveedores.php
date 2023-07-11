@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <?php require "../html/nav.html"; ?>
+  <?php require "../html/nav2.html"; ?>
   
 
 </body>

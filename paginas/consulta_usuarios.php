@@ -20,8 +20,8 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT rif_proveedor, nombre_proveedor, numero_contacto,
-                        persona_contacto, correo_proveedor FROM tbl_proveedores;";
+$sql_facturas = "SELECT usuario, clave_usuario, cedula_usuario,
+                        nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario FROM tbl_usuarios;";
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
 $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consultar facturas: " . mysqli_error($conexion));
@@ -39,13 +39,14 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Consulta Proveedores</title>
+  <title>Consulta Usuarios</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="../css/styles_nav.css" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
+
    <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
-   <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
 
     <!-- Enlaces a Bootstrap 4 -->
     <link rel="stylesheet" href="./Bootstrap-4-4.1.1/css/bootstrap.min.css" />
@@ -58,7 +59,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
     <!-- Invoca y Traduce al metodo DataTable() -->
     <script>
       $(function () {
-        $("#tbl_proveedores").DataTable({
+        $("#tbl_usuarios").DataTable({
           language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
@@ -106,6 +107,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         margin-top: 80px;
         max-width: 1200px;
       }
+
     </style>
 </head>
 <body>
@@ -114,34 +116,38 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
-        <h1>Proveedores</h1>
+        <h1>Usuarios</h1>
         <br>
-        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo Proveedor
+        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo Usuario
         <i class="fa fa-plus"></i></a>
         <hr>
 
         <table
-          id="tbl_proveedores"
+          id="tbl_usuarios"
           class="table table-striped table-hover dt-responsive nowrap display"
           style="width: 100%"
         >
           <thead>
             <tr>
-              <th>Rif</th>
+              <th>Usuario</th>
+              <th>Clave</th>
+              <th>Cedula</th>
               <th>Nombre</th>
-              <th>Numero de Contacto</th>
-              <th>Persona de Contacto</th>
+              <th>Apellido</th>
               <th>Correo</th>
+              <th>Direccion</th>
               <th>Acciones</th>
             </tr>
           </thead>
 
           <tfoot>
             <tr>
-              <th>Rif</th>
+              <th>Usuario</th>
+              <th>Clave</th>
+              <th>Cedula</th>
               <th>Nombre</th>
-              <th>Numero de Contacto</th>
-              <th>Persona de Contacto</th>
+              <th>Nombre</th>
+              <th>Correo</th>
               <th>Correo</th>
               <th>Acciones</th>
             </tr>
@@ -154,13 +160,15 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                     while($row_factura = mysqli_fetch_array($rcs_facturas, MYSQLI_ASSOC)) {
                     ?>
                         <tr>
-                            <td class="fila_datos texto_cen"><?php echo $row_factura['rif_proveedor']; ?></td>
-                            <td class="fila_datos texto_cen"><?php echo $row_factura['nombre_proveedor']; ?></td>
-                            <td class="fila_datos texto_der"><?php echo $row_factura['numero_contacto']; ?></td>
-                            <td class="fila_datos texto_cen"><?php echo $row_factura['persona_contacto']; ?></td>
-                            <td class="fila_datos texto_izq"><?php echo $row_factura['correo_proveedor']; ?></td>
+                            <td class="fila_datos texto_cen"><?php echo $row_factura['usuario']; ?></td>
+                            <td class="fila_datos texto_cen"><?php echo $row_factura['clave_usuario']; ?></td>
+                            <td class="fila_datos texto_der"><?php echo $row_factura['cedula_usuario']; ?></td>
+                            <td class="fila_datos texto_cen"><?php echo $row_factura['nombre_usuario']; ?></td>
+                            <td class="fila_datos texto_izq"><?php echo $row_factura['apellido_usuario']; ?></td>
+                            <td class="fila_datos texto_izq"><?php echo $row_factura['correo_usuario']; ?></td>
+                            <td class="fila_datos texto_izq"><?php echo $row_factura['direccion_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><a class="btn btn-warning" href="editar_user.php?id=<?php echo $fila['id']?> "><i class="fa-solid fa-user-plus"></i></a>
-                            <a class="btn btn-danger" href="eliminar_user.php?id=<?php echo $fila['id']?>"><i class="fa-solid fa-user-minus"></i></a>
+                            <a class="btn btn-danger" href="eliminar_user.php?id=<?php echo $fila['id']?>"><i class="fa-solid fa-user-minus"></i></i></a>
                             </td>
                         </tr>
                         <?php
@@ -172,49 +180,101 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         </table>
       </div>
     </div>  
+
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro Proveedor</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro Usuario</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
 
-          <form class="needs-validation" novalidate action="../php/procesar-proveedor2.php" method="POST">
-            <div class="row mb-3">
-              <label for="rif_proveedor" class="col-3 col-form-label">Rif Proveedor</label>
+          <form class="needs-validation" novalidate action="../php/procesar-usuario2.php" method="POST">
+            <div class="row mb-4">
+              <label for="usuario" class="col-3 col-form-label">Usuario</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="rif_proveedor" name="rif_proveedor">
-              </div>
-              <div class="valid-feedback">
-                Por Favor Ingresar Usuario
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="nombre_proveedor" class="col-3 col-form-label">Nombre Proveedor</label>
-              <div class="col-9">
-                <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor">
+                <input type="text" class="form-control" required id="usuario" name="usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar un Nombre de Usuario.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="persona_contacto" class="col-3 col-form-label">Persona Contacto</label>
+              <label for="clave_usuario" class="col-3 col-form-label">Clave</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="persona_contacto" name="persona_contacto">
+                <input type="password" class="form-control" required id="clave_usuario" name="clave_usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                 Debe Ingresar su Clave.
+              </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+              <label for="cedula_usuario" class="col-3 col-form-label">Cedula</label>
+              <div class="col-9">
+                <input type="text" class="form-control" required id="cedula_usuario" name="cedula_usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar su Numero de Cédula.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="numero_contacto" class="col-3 col-form-label">Numero Contacto</label>
+              <label for="nombre_usuario" class="col-3 col-form-label">Nombre</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="numero_contacto" name="numero_contacto">
+                <input type="text" class="form-control" required id="nombre_usuario" name="nombre_usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar su Nombre.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="correo_proveedor" class="col-3 col-form-label">Email Proveedor</label>
+              <label for="apellido_usuario" class="col-3 col-form-label">Apellido</label>
               <div class="col-9">
-                <input type="email" class="form-control" id="correo_proveedor" name="correo_proveedor">
+                <input type="text" class="form-control" required id="apellido_usuario" name="apellido_usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                 Debe Ingresar su Apellido.
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="correo_usuario" class="col-3 col-form-label">Correo</label>
+              <div class="col-9">
+                <input type="email" class="form-control" required id="correo_usuario" name="correo_usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar su Correo.
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="direccion_usuario" class="col-3 col-form-label">Dirección</label>
+              <div class="col-9">
+                <input type="text" class="form-control" required id="direccion_usuario" name="direccion_usuario">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar su Dirección.
+                </div>
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Confirmar</button>
@@ -229,7 +289,8 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 </div>
 
 <script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   'use strict'
 
@@ -248,6 +309,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
     }, false)
   })
 })()
+
 </script>
 
 </body>
