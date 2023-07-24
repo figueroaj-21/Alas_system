@@ -1,6 +1,8 @@
 <?php require "../php/seguridad.php"; 
   require "../php/conexion.php"; 
-  $nombre = $_SESSION['nombre_usuario'];
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
+  $login_usuario = $_SESSION['login_usuario'];
 ?>
 <?php
 /**
@@ -20,7 +22,7 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT usuario, clave_usuario, cedula_usuario,
+$sql_facturas = "SELECT login_usuario, clave_usuario, cedula_usuario,
                         nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario FROM tbl_usuarios;";
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
@@ -160,7 +162,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                     while($row_factura = mysqli_fetch_array($rcs_facturas, MYSQLI_ASSOC)) {
                     ?>
                         <tr>
-                            <td class="fila_datos texto_cen"><?php echo $row_factura['usuario']; ?></td>
+                            <td class="fila_datos texto_cen"><?php echo $row_factura['login_usuario']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['clave_usuario']; ?></td>
                             <td class="fila_datos texto_der"><?php echo $row_factura['cedula_usuario']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['nombre_usuario']; ?></td>
@@ -192,11 +194,11 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
       <div class="modal-body">
         <div class="container-fluid">
 
-          <form class="needs-validation" novalidate action="../php/procesar-usuario2.php" method="POST">
+          <form class="needs-validation" novalidate action="../php/procesar-usuario3.php" method="POST">
             <div class="row mb-4">
               <label for="usuario" class="col-3 col-form-label">Usuario</label>
               <div class="col-9">
-                <input type="text" class="form-control" required id="usuario" name="usuario">
+                <input type="text" class="form-control" required id="login_usuario" name="login_usuario">
                 <div class="valid-feedback">
                   Ok.
                 </div>

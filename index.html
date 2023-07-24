@@ -1,39 +1,133 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <title>Login</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="./css/styles_login.css" rel="stylesheet">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-</head>
-<body>
-  <div class="login-box">
-    <h2>Login</h2>
-    <form id="loginForm" name="loginForm" action="./php/Login.php" method="POST">
-      <div class="user-box">
-        <input type="text" name="usuario" id="usuario">
-        <label>Usuario</label>
-      </div>
-      <div class="user-box">
-        <input type="password" name="password" id="password">
-        <label>Password</label>
-      </div>
-      <a>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Entrar
-      </a>
-      <input type="submit" name="" value="Enviar">
-    </form>
+    <link rel="stylesheet" href="./css/styles_login.css">
 
-  </div>
+    <style>
+    @font-face {
+      font-family: 'Rockwell'; /* Nombre de la fuente */
+      src: url('./font/Rockwell.otf') format('truetype'); /* Ruta al archivo de la fuente */
+      /* Puedes agregar estilos adicionales, como font-weight o font-style si es necesario */
+    }
+
+    </style>
+
+  <body class="bg-dark">
+   <section>
+     <div class="row g-0">
+       <div class="col-lg-7">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./img/img1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./img/img2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./img/img3.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./img/img4.jpg" class="d-block w-100" alt="...">
+            </div>
+            
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+                 
+       </div>
+       <div class="col-lg-5 d-flex flex-column aling-item-end min-vh-100">
+        <div class="px-lg-5 w-100 mb-auto+">
+          <img src="./img/logoalas.png" class="img-fluid">
+        </div>
+        <div class="px-lg-5 py-lg-4 p-4 w-100 mb-align-self-center">
+          <center><h1 class="font-weight-bold mb-4">BIENVENIDO</h1></center>
+
+          <form class="needs-validation" novalidate action="./php/login_aud.php" method="post">
+            <div class="mb-3">
+              <label for="login_usuario" class="form-label">Usuario</label>
+              <input type="text" class="form-control border-0" required id="login_usuario" name="login_usuario" placeholder="Ingresar Usuario">
+              <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar un Nombre de Usuario.
+                </div>
+            </div>
+            <div class="mb-3">
+              <label for="clave_usuario" class="form-label">Password</label>
+              <input type="password" class="form-control border-0" required id="clave_usuario" name="clave_usuario" placeholder="Ingresar Clave">
+              <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar su Contraseña.
+                </div>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary w-100" value="Iniciar Sesión">
+          </form>
 
 
-  <script src="./jquery-3.6.1/jquery-3.6.1.min.js"></script>
-  <script src="./js/validar_login_jquery.js"></script>
-</body>
+        </div>
+       </div>
+     </div>
+   </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+
+    <!-- Enlace a Bootstrap JS y tu propio script -->
+    <script>
+      // Inicializa el carrusel con un intervalo de tiempo de 3 segundos (3000ms)
+      const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleIndicators'), {
+        interval: 3000
+      });
+    </script>
+
+    <script>
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+</script>
+
+  </body>
 </html>

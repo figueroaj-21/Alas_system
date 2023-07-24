@@ -66,12 +66,11 @@ CREATE TABLE tbl_usuarios (
 CREATE TABLE tbl_auditoria (
   id_auditoria int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la Auditoria',
   usuario_aud varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del Usuario',
-  tiemporegistro_aud date NOT NULL COMMENT 'Tiempo de Registro',
+  tiemporegistro_aud datetime NOT NULL COMMENT 'Tiempo de Registro',
   accion_aud varchar(250) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Accion Efectuada',
   query_aud text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Consultas',
   id_usuario int(11) NOT NULL COMMENT 'Id del Usuario',
-  PRIMARY KEY (id_auditoria),
-  FOREIGN KEY (id_usuario) REFERENCES tbl_usuarios (id_usuario)
+  PRIMARY KEY (id_auditoria)
 ) COMMENT 'Tabla de Auditoria';
 
 -- Tabla productos

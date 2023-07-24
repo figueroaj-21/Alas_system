@@ -1,6 +1,8 @@
 <?php
 // Establece la conexión a la base de datos
 require "conexion.php";
+session_start();
+$usuario = $_SESSION['login_usuario'];
 
 // Función para validar y sanear los datos ingresados por el usuario
 function validarDatos($dato)
@@ -18,7 +20,7 @@ $persona_contacto = validarDatos($_POST["persona_contacto"]);
 $numero_contacto = validarDatos($_POST["numero_contacto"]);
 $correo_proveedor = validarDatos($_POST["correo_proveedor"]);
 
-// Verifica si el usuario ya está registrado
+// Verifica si el proveedor ya está registrado
 $sql = "SELECT * FROM tbl_proveedores WHERE rif_proveedor = ?";
 $stmt = mysqli_prepare($conexion, $sql);
 mysqli_stmt_bind_param($stmt, "s", $rif_proveedor);
@@ -43,17 +45,32 @@ $stmt = mysqli_prepare($conexion, $sql);
 mysqli_stmt_bind_param($stmt, "sssss", $rif_proveedor, $nombre_proveedor, $persona_contacto, $numero_contacto, $correo_proveedor);
 $resul = mysqli_stmt_execute($stmt);
 
-mysqli_stmt_close($stmt);
-mysqli_close($conexion);
-
 if ($resul) {
+  mysqli_stmt_close($stmt);
+
+  // Obtener la fecha actual
+  $fecha = date("Y-m-d H:i:s");
+
+  // Construir la consulta de inserción en tbl_auditoria
+  $accion_aud = "El usuario [$usuario] registró al Proveedor [$nombre_proveedor]";
+  $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES (?, ?, ?)";
+  $stmt_aud = mysqli_prepare($conexion, $sql_aud);
+  mysqli_stmt_bind_param($stmt_aud, "sss", $usuario, $fecha, $accion_aud);
+  mysqli_stmt_execute($stmt_aud);
+  mysqli_stmt_close($stmt_aud);
+
+  mysqli_close($conexion);
+
   echo '
     <script>
       alert("Proveedor registrado exitosamente");
       window.location = "../paginas/consulta_proveedores.php";
     </script>';
   exit();
+
 } else {
+  mysqli_stmt_close($stmt);
+  mysqli_close($conexion);
   echo '
     <script>
       alert("Error al registrar el Proveedor");
@@ -61,7 +78,5 @@ if ($resul) {
     </script>';
   exit();
 }
-
-mysqli_stmt_close($stmt);
-mysqli_close($conexion);
 ?>
+

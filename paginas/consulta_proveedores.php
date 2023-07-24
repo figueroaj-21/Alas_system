@@ -1,6 +1,8 @@
 <?php require "../php/seguridad.php"; 
   require "../php/conexion.php"; 
-  $nombre = $_SESSION['nombre_usuario'];
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
+  $login_usuario = $_SESSION['login_usuario'];
 ?>
 <?php
 /**
@@ -187,34 +189,61 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
             <div class="row mb-3">
               <label for="rif_proveedor" class="col-3 col-form-label">Rif Proveedor</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="rif_proveedor" name="rif_proveedor">
-              </div>
-              <div class="valid-feedback">
-                Por Favor Ingresar Usuario
+                <input type="text" class="form-control" id="rif_proveedor" required name="rif_proveedor">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar un Rif.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
               <label for="nombre_proveedor" class="col-3 col-form-label">Nombre Proveedor</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor">
+                <input type="text" class="form-control" id="nombre_proveedor" required name="nombre_proveedor">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar un Nombre de Proveedor.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
               <label for="persona_contacto" class="col-3 col-form-label">Persona Contacto</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="persona_contacto" name="persona_contacto">
+                <input type="text" class="form-control" id="persona_contacto" required name="persona_contacto">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar una Persona de Contacto.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="numero_contacto" class="col-3 col-form-label">Numero Contacto</label>
+              <label for="numero_contacto" class="col-3 col-form-label">Numero de Contacto</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="numero_contacto" name="numero_contacto">
+                <input type="text" class="form-control" id="numero_contacto" required name="numero_contacto">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar un Numero de Contacto.
+                </div>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="correo_proveedor" class="col-3 col-form-label">Email Proveedor</label>
+              <label for="correo_proveedor" class="col-3 col-form-label">Correo Proveedor</label>
               <div class="col-9">
-                <input type="email" class="form-control" id="correo_proveedor" name="correo_proveedor">
+                <input type="email" class="form-control" id="correo_proveedor" required name="correo_proveedor">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar un Correo.
+                </div>
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Confirmar</button>

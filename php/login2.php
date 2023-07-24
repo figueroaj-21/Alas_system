@@ -14,7 +14,7 @@ if ($_POST) {
     $row = $resultado->fetch_assoc();
     $password_db = $row['clave_usuario'];
 
-    if (password_verify($password, $password_db)) {
+    if ($password_db == $password) {
       $_SESSION['id_usuario'] = $row['id_usuario'];
       $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
       $_SESSION['apellido_usuario'] = $row['apellido_usuario'];

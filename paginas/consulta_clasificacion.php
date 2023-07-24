@@ -1,6 +1,8 @@
 <?php require "../php/seguridad.php"; 
   require "../php/conexion.php"; 
-  $nombre = $_SESSION['nombre_usuario'];
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
+  $usuario = $_SESSION['login_usuario'];
 ?>
 <?php
 /**
@@ -42,6 +44,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
   <link href="../css/styles_nav.css" rel="stylesheet">
    <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
 
@@ -168,10 +171,13 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
             <div class="row mb-3">
               <label for="clasificacion" class="col-3 col-form-label">Clasificación</label>
               <div class="col-9">
-                <input type="text" class="form-control" id="clasificacion" name="clasificacion">
-              </div>
-              <div class="valid-feedback">
-                Por Favor Ingresar Usuario
+                <input type="text" class="form-control" id="clasificacion" required name="clasificacion">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                  Debe Ingresar Clasificacion.
+                </div>
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Confirmar</button>

@@ -1,6 +1,8 @@
 <?php
 // Establece la conexión a la base de datos
 require "conexion.php";
+session_start();
+$usuario = $_SESSION['login_usuario'];
 
 // Función para validar y sanear los datos ingresados por el usuario
 function validarDatos($dato)
@@ -41,6 +43,17 @@ if ($resul) {
     </script>
     exit();
   ';
+
+   // Obtener la fecha actual
+  $fecha = date("Y-m-d H:i:s");
+
+    // Construir la consulta de inserción en tbl_auditoria
+  $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES ('$usuario', '$fecha', 'El usuario [$usuario] registró la clasificacion [$clasificacion]')";
+
+  $auditoria = mysqli_query($conexion, $sql_aud);
+  
+  exit();
+
 } else {
   echo '
     <script>
