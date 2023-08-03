@@ -22,7 +22,8 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT p.codigo, c.clasificacion, p.descripcion, p.observaciones, p.costo, p.existencia, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor";
+$sql_facturas = "SELECT p.id_producto, p.codigo, c.clasificacion, p.descripcion, p.observaciones, p.costo, p.existencia, pr.id_proveedor, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor";
+//WHERE estado = 1
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
 $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consultar facturas: " . mysqli_error($conexion));
@@ -115,10 +116,6 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 <body>
 
   <?php require "../html/nav2.html"; ?>
-  <?php require "../html/modal_entrada.html"; ?>
-  <?php require "../html/modal_salida.html"; ?>
-  <?php require "../html/modal_editar_producto.html"; ?>
-
 
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
@@ -137,6 +134,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         >
           <thead>
             <tr>
+              <th>ID</th>
               <th>Codigo</th>
               <th>Clasificacion</th>
               <th>Descripcion</th>
@@ -150,6 +148,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
           <tfoot>
             <tr>
+              <th>ID</th>
               <th>Codigo</th>
               <th>Clasificacion</th>
               <th>Descripcion</th>
@@ -168,6 +167,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                     while($row_factura = mysqli_fetch_array($rcs_facturas, MYSQLI_ASSOC)) {
                     ?>
                         <tr>
+                            <td class=""><?php echo $row_factura['id_producto']; ?></td>
                             <td class=""><?php echo $row_factura['codigo']; ?></td>
                             <td class=""><?php echo $row_factura['clasificacion']; ?></td>
                             <td class=""><?php echo $row_factura['descripcion']; ?></td>
@@ -175,10 +175,17 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class=""><?php echo $row_factura['costo']; ?></td>
                             <td class=""><?php echo $row_factura['existencia']; ?></td>
                             <td class=""><?php echo $row_factura['nombre_proveedor']; ?></td>
-                            <td class=""><a  class="btn btn-outline-success" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-square-plus"></i></a>
-                            <a class="btn btn-outline-danger" href="" data-bs-toggle="modal" data-bs-target="#exampleModalsalida"><i class="fa-regular fa-square-minus"></i></a>
-                            <a class="btn btn-outline-warning" href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop_editarproducto"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a class="btn btn-outline-dark" href="eliminar_user.php?id=<?php echo $fila['id']?>"><i class="fa-solid fa-ban"></i></a> 
+                            <td class=""><!-- Enlace para abrir el modal de modal_entrada.html -->
+                            <a class="btn btn-outline-success" href="registro_entrada.php?id_producto=<?php echo $row_factura['id_producto']; ?>&id_proveedor=<?php echo $row_factura['id_proveedor']; ?>" title="Registra una entrada para el producto <?php echo $row_factura["descripcion"]; ?>">
+                            <i class="fa-regular fa-square-plus"></i>
+                            </a>
+                            <a class="btn btn-outline-danger" href="registro_salidas.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Registra una salida para el producto <?php echo $row_factura["descripcion"]; ?>">
+                            <i class="fa-regular fa-square-minus"></i> 
+                            </a>
+                            <a class="btn btn-outline-warning" href="form_editar_producto.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Actualiza el registo <?php echo $row_factura["descripcion"]; ?>"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a class="btn btn-outline-dark" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["descripcion"]; ?>" onclick="inhabilitarProducto(<?php echo $row_factura['id_producto']; ?>)">
+                            <i class="fa-solid fa-ban"></i>
+                            </a> 
                         	</td>
                         </tr>
                         <?php
@@ -193,7 +200,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro Producto</h1>
@@ -218,30 +225,30 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
             <div class="row mb-3">
               <label for="clasificacion" class="col-3 col-form-label">Clasificación</label>
               <div class="col-9">
-				  <select class="form-control" required name="id_clasificacion" id="id_clasificacion">
-				  <?php
-				  // Incluye el archivo de conexión
-				  require_once '../php/conexion.php';
+				<select class="form-control" required name="id_clasificacion" id="id_clasificacion">
+				<?php
+          // Incluye el archivo de conexión
+          require_once '../php/conexion.php';
 
-				  // Consulta para obtener los registros de la base de datos
-				  $sql = "SELECT id_clasificacion, clasificacion FROM tbl_clasificacion"; 
+          // Consulta para obtener los registros de la base de datos
+          $sql = "SELECT id_clasificacion, clasificacion FROM tbl_clasificacion"; 
 
-				  // Ejecuta la consulta
-				  $result = mysqli_query($conexion, $sql);
+          // Ejecuta la consulta
+          $result = mysqli_query($conexion, $sql);
 
-				  // Verifica si hay registros y crea las opciones
-				  if (mysqli_num_rows($result) > 0) {
-				    while ($row = mysqli_fetch_assoc($result)) {
-				      // Verifica si el valor de id_clasificacion coincide con el valor actual de la iteración
-				      $selected = ($_POST['id_clasificacion'] == $row['id_clasificacion']) ? 'selected' : '';
+          // Verifica si hay registros y crea las opciones
+          if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+              // Verifica si el valor de id_clasificacion coincide con el valor actual de la iteración
+              $selected = ($_POST['id_clasificacion'] == $row['id_clasificacion']) ? 'selected' : '';
 
-				      // Agrega el atributo 'selected' si corresponde
-				      echo '<option value="' . $row['id_clasificacion'] . '" ' . $selected . '>' . $row['clasificacion'] . '</option>';
-				    }
-				  } else {
-				    echo '<option value="">No hay registros disponibles</option>';
-				  }
-				  ?>
+              // Agrega el atributo 'selected' si corresponde
+              echo '<option value="' . $row['id_clasificacion'] . '" ' . $selected . '>' . $row['clasificacion'] . '</option>';
+            }
+          } else {
+            echo '<option value="">No hay registros disponibles</option>';
+          }
+          ?>
 				</select>
                 <div class="valid-feedback">
                   Ok.
@@ -290,7 +297,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
             <div class="row mb-3">
               <label for="nombre_proveedor" class="col-3 col-form-label">Proveedor</label>
               <div class="col-9">
-                <select class="form-control" required name="id_proveedor" id="id_proveedor">
+              <select class="form-control" required name="id_proveedor" id="id_proveedor">
                 	<?php
 			            // Incluye el archivo de conexión
 			            require_once '../php/conexion.php';
@@ -366,7 +373,35 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
 </script>
 
+<script>
+function inhabilitarProducto(idProducto) {
+  // Realizar una solicitud AJAX a un archivo PHP para habilitar/inhabilitar el registro
+
+  const url = "../php/inabilitar_producto.php?id_producto=" + idProducto;
   
+  // Realizar la solicitud AJAX
+  fetch(url, { method: "POST" })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Si la operación fue exitosa, puedes realizar alguna acción aquí, como recargar la tabla de productos
+        if (data.estado == 1) {
+          alert("Producto habilitado correctamente.");
+        } else {
+          alert("Producto inhabilitado correctamente.");
+        }
+        window.location.reload(); // Recarga la página para reflejar los cambios
+      } else {
+        // Si la operación falló, muestra un mensaje de error
+        alert("Error al cambiar el estado del producto. Inténtalo de nuevo más tarde.");
+      }
+    })
+    .catch(error => {
+      console.error("Error al realizar la solicitud AJAX: ", error);
+      alert("Ha ocurrido un error inesperado. Inténtalo de nuevo más tarde.");
+    });
+}
+</script>
 
 </body>
 </html>

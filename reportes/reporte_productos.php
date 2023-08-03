@@ -1,195 +1,67 @@
-<?php require "../php/seguridad.php";  
-  require "../php/conexion.php";
-  $nombre_usuario = $_SESSION['nombre_usuario'];
-  $apellido_usuario = $_SESSION['apellido_usuario'];
-  //$tipo_rol = $_SESSION['tipo_rol'];
-  ob_start();
+<?php
+require "../php/seguridad.php";
+require "../php/conexion.php";
 
-/**
- * connect_struct_consulta_basedatos.php
- *
- * 1. Establece conexión a un gestor de bases de datos
- * 2. Estructura una consulta SQL
- * 3. Ejecuta la consulta
- * 4. Obtiene el total de registros devueltos
- * 5. Muestra los registros devueltos por la consulta
- * 6. Libera la memoria utilizada
- * 7. Cierra la conexión al gestor de bases de datos
- */
+// Incluir la librería FPDF
+require "../fpdf/fpdf.php";
 
-// 1. Establece conexión a un gestor de bases de datos MySQL
+// Obtener los datos del usuario desde $_SESSION
+$nombre_usuario = $_SESSION['nombre_usuario'];
+$apellido_usuario = $_SESSION['apellido_usuario'];
 
-
-// 2. Estructura una consulta SQL
-//    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
+// Consulta para obtener los datos de los productos
 $sql_facturas = "SELECT p.codigo, c.clasificacion, p.descripcion, p.observaciones, p.costo, p.existencia, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor";
 
+// Ejecutar la consulta y obtener los resultados
+$resultado = mysqli_query($conexion, $sql_facturas) or die("Error al consultar productos: " . mysqli_error($conexion));
 
-// 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
-$rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consultar facturas: " . mysqli_error($conexion));
+// Crear un nuevo PDF
+$pdf = new FPDF();
+$pdf->AddPage('L');
 
-// 4. Obtiene la cantidad de registros devueltos
-$num_reg = mysqli_num_rows($rcs_facturas);
+// Ruta de la imagen que deseas agregar al PDF
+$imagen = '../img/logoalas.png'; 
 
-/* 5. Muestra los registros devueltos por la consulta */
+// Coordenadas donde deseas ubicar la imagen en el PDF
+$posX = 4;
+$posY = -4;
 
-// 5.1 Evalúa el total de registros devueltos
-//     Asigna a la variable $muestra_tabla el valor devuelto al evaluar la condición
-//     Utiliza un Operador Ternario
-$muestra_tabla = ($num_reg > 0) ? true : false;
-?>
-<!doctype html>
-<html lang="es">
-<head>
-  <title>Home</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+// Ancho y alto de la imagen en el PDF
+$ancho = 40;
+$alto = 40;
 
-  <!-- Botones -->
-    <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
-     <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
+// Agregar la imagen al PDF
+$pdf->Image($imagen, $posX, $posY, $ancho, $alto);
 
-    <!-- Enlaces a Bootstrap 4 -->
-        <script src="./Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
+// Agregar el encabezado del PDF
+$pdf->SetFont('Arial', 'B', 16);
+$pdf->Cell(0, 10, 'Reporte General deProductos', 0, 1, 'C');
+$pdf->Ln(10);
 
-    <!-- Enlace a Bootstrap web-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+// Agregar los datos de los productos en una tabla
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(30, 10, 'Codigo', 1);
+$pdf->Cell(40, 10, 'Clasificacion', 1);
+$pdf->Cell(60, 10, 'Descripcion', 1);
+$pdf->Cell(20, 10, 'Costo', 1);
+$pdf->Cell(30, 10, 'Existencia', 1);
+$pdf->Cell(60, 10, 'Proveedor', 1);
+$pdf->Ln();
 
-    <!-- Enlaces a DataTables CSS y JS -->
-    <link rel="stylesheet" href="./datatables.min.css" />
-    <script src="./datatables.min.js"></script>
+// Recorrer los resultados y agregar los datos a la tabla
+while ($row_factura = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
+    $pdf->Cell(30, 10, $row_factura['codigo'], 1);
+    $pdf->Cell(40, 10, $row_factura['clasificacion'], 1);
+    $pdf->Cell(60, 10, $row_factura['descripcion'], 1);
+    $pdf->Cell(20, 10, $row_factura['costo'], 1);
+    $pdf->Cell(30, 10, $row_factura['existencia'], 1);
+    $pdf->Cell(60, 10, $row_factura['nombre_proveedor'], 1);
+    $pdf->Ln();
+}
 
-    <!-- Invoca y Traduce al metodo DataTable() -->
-    <script>
-      $(function () {
-        $("#tbl_usuarios").DataTable({
-          language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ registros",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla =(",
-            sInfo:
-              "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            sInfoEmpty:
-              "Mostrando registros del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sInfoPostFix: "",
-            sSearch: "Buscar:",
-            sUrl: "",
-            sInfoThousands: ",",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-              sFirst: "Primero",
-              sLast: "Último",
-              sNext: "Siguiente",
-              sPrevious: "Anterior",
-            },
-            oAria: {
-              sSortAscending:
-                ": Activar para ordenar la columna de manera ascendente",
-              sSortDescending:
-                ": Activar para ordenar la columna de manera descendente",
-            },
-            buttons: {
-              copy: "Copiar",
-              colvis: "Visibilidad",
-            },
-            decimal: ",",
-            thousands: ".",
-          },
-          lengthMenu: [
-            [10, 20, 30, 50, -1],
-            [10, 20, 30, 50, "Todos"],
-          ],
-        });
-      });
-    </script>
+// Salida del PDF
+$pdf->Output();
 
-    <style>
-      div.container {
-        margin-top: 40px;
-        max-width: 1200px;
-      }
-    </style>
-</head>
-<body>
-<?php $imagen = "../img/logoalas.jpg"; ?>
-
-
- <div class="container">
-
-      <img class="img-thumbnail rounded" src="http://<?php echo $_SERVER[HTTP_HOS]; ?>/alas_system/img/logoalas.jpg<?php echo $imagen;?>">
-
-
-      <div class="col-md-12 col-md-offset-2">
-        <h1>Productos</h1>
-        <br>
-
-        <hr>
-
-        <table
-          id="tbl_usuarios"
-          class="table table-striped table-hover dt-responsive nowrap display"
-          style="width: 100%"
-        >
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Clasificacion</th>
-              <th>Descripcion</th>
-              <th>Costo</th>
-              <th>Exitencia</th>
-              <th>Proveedor</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          <?php
-                    $i = 1;
-                    while($row_factura = mysqli_fetch_array($rcs_facturas, MYSQLI_ASSOC)) {
-                    ?>
-                        <tr>
-                            <td class=""><?php echo $row_factura['codigo']; ?></td>
-                            <td class=""><?php echo $row_factura['clasificacion']; ?></td>
-                            <td class=""><?php echo $row_factura['descripcion']; ?></td>
-                            <td class=""><?php echo $row_factura['costo']; ?></td>
-                            <td class=""><?php echo $row_factura['existencia']; ?></td>
-                            <td class=""><?php echo $row_factura['nombre_proveedor']; ?></td>
-                        </tr>
-                        <?php
-                        $i++;
-                    }
-                    ?>
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-  
-
-</body>
-</html>
-<?php
-require_once '../dompdf/autoload.inc.php';
-use Dompdf\Dompdf;
-
-$html = ob_get_clean();
-
-// Crear una instancia de Dompdf
-$dompdf = new Dompdf();
-
-// Configurar la orientación y el tamaño del papel
-$dompdf->setPaper("letter", "portrait");
-
-// Cargar el contenido HTML
-$dompdf->loadHtml($html);
-
-// Renderizar el PDF
-$dompdf->render();
-
-// Descargar el PDF generado
-$dompdf->stream("reporte_productos.pdf", array("Attachment" => false));
-
+// Cierra la conexión
+mysqli_close($conexion);
 ?>

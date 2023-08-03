@@ -22,7 +22,7 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT id_auditoria, usuario_aud, tiemporegistro_aud, accion_aud, query_aud FROM tbl_auditoria ORDER BY id_auditoria DESC";
+$sql_facturas = "SELECT id_auditoria, usuario_aud, tiemporegistro_aud, accion_aud FROM tbl_auditoria ORDER BY id_auditoria DESC";
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
 $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consultar facturas: " . mysqli_error($conexion));
@@ -119,6 +119,8 @@ $num_reg = mysqli_num_rows($rcs_facturas);
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
         <h1>Bitacora del Sistema</h1>
+        <a href="../reportes/reporte_auditoria.php" target="_blank" class="btn btn-danger">PDF
+        <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 
         <table
@@ -132,7 +134,6 @@ $num_reg = mysqli_num_rows($rcs_facturas);
               <th>Usuario</th>
               <th>Fecha</th>
               <th>Acción Efectuada</th>
-              <th>Query</th>
             </tr>
           </thead>
 
@@ -142,7 +143,6 @@ $num_reg = mysqli_num_rows($rcs_facturas);
               <th>Usuario</th>
               <th>Fecha</th>
               <th>Acción Efectuada</th>
-              <th>Query</th>
             </tr>
           </tfoot>
 
@@ -156,9 +156,7 @@ $num_reg = mysqli_num_rows($rcs_facturas);
                             <td class="fila_datos texto_cen"><?php echo $row_factura['id_auditoria']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['usuario_aud']; ?></td>
                             <td class="fila_datos texto_der"><?php echo $row_factura['tiemporegistro_aud']; ?></td>
-                            <td class="fila_datos texto_cen"><?php echo $row_factura['accion_aud']; ?></td>
-                            <td class="fila_datos texto_izq"><?php echo $row_factura['query_aud']; ?></td>
-                            
+                            <td class="fila_datos texto_cen"><?php echo $row_factura['accion_aud']; ?>           
                         </tr>
                         <?php
                         $i++;

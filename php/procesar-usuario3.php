@@ -35,9 +35,12 @@ if (mysqli_num_rows($verificar_cedula) > 0) {
   exit();
 }
 
+// Encriptar la contraseña utilizando password_hash()
+$hash_contrasena = password_hash($clave_usuario, PASSWORD_DEFAULT);
+
 // Inserta los datos en la base de datos
 $sql = "INSERT INTO tbl_usuarios (login_usuario, clave_usuario, cedula_usuario, nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario)
-        VALUES ('$login_usuario', '$clave_usuario', '$cedula_usuario', '$nombre_usuario', '$apellido_usuario', '$correo_usuario', '$direccion_usuario')";
+        VALUES ('$login_usuario', '$hash_contrasena', '$cedula_usuario', '$nombre_usuario', '$apellido_usuario', '$correo_usuario', '$direccion_usuario')";
 
 $resul = mysqli_query($conexion, $sql);
 

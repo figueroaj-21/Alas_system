@@ -22,7 +22,7 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT login_usuario, clave_usuario, cedula_usuario,
+$sql_facturas = "SELECT id_usuario, login_usuario, clave_usuario, cedula_usuario,
                         nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario FROM tbl_usuarios;";
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
@@ -131,6 +131,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         >
           <thead>
             <tr>
+              <th>ID</th>
               <th>Usuario</th>
               <th>Clave</th>
               <th>Cedula</th>
@@ -144,6 +145,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
           <tfoot>
             <tr>
+              <th>ID</th>
               <th>Usuario</th>
               <th>Clave</th>
               <th>Cedula</th>
@@ -162,6 +164,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                     while($row_factura = mysqli_fetch_array($rcs_facturas, MYSQLI_ASSOC)) {
                     ?>
                         <tr>
+                            <td class="fila_datos texto_cen"><?php echo $row_factura['id_usuario']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['login_usuario']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['clave_usuario']; ?></td>
                             <td class="fila_datos texto_der"><?php echo $row_factura['cedula_usuario']; ?></td>
@@ -169,7 +172,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_izq"><?php echo $row_factura['apellido_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['correo_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['direccion_usuario']; ?></td>
-                            <td class="fila_datos texto_izq"><a class="btn btn-warning" href="editar_user.php?id=<?php echo $fila['id']?> "><i class="fa-solid fa-user-plus"></i></a>
+                            <td class="fila_datos texto_izq"><a class="btn btn-warning" href="form_editar_usuario.php?id_usuario=<?php echo $row_factura['id_usuario']; ?>"><i class="fa-solid fa-user-plus"></i></a>
                             <a class="btn btn-danger" href="eliminar_user.php?id=<?php echo $fila['id']?>"><i class="fa-solid fa-user-minus"></i></i></a>
                             </td>
                         </tr>
@@ -183,7 +186,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
       </div>
     </div>  
 
-<!-- Modal -->
+<!-- Modal de Registro de Provedor -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

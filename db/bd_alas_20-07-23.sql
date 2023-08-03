@@ -1,3 +1,16 @@
+--
+-- Base de datos: bd_alas
+--
+
+-- Elimina la base de datos, si existe
+DROP DATABASE IF EXISTS bd_alas;
+
+-- Crea la base de datos bd_alas
+CREATE DATABASE bd_alas DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- Selecciona la base de datos a utilizar
+USE bd_alas;
+
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
