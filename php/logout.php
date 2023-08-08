@@ -8,7 +8,7 @@ if (isset($_SESSION['id_usuario'])) {
     // Si la sesión existe y el usuario está registrado, se considera cierre de sesión
 
     // Obtener la fecha actual
-    $fecha = date("Y-m-d H:i:s");
+    $fecha = date("Y-m-d");
 
     // Obtener el usuario de la sesión
     $login_usuario = $_SESSION['login_usuario'];

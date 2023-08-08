@@ -34,6 +34,7 @@ if (isset($_GET['id_usuario']) && is_numeric($_GET['id_usuario'])) {
 <html lang="es">
 <head>
   <title>Editar Usuario</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

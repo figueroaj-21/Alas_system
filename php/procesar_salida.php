@@ -1,11 +1,15 @@
 <?php
 require "../php/conexion.php";
+session_start();
+$usuario = $_SESSION['login_usuario'];
 
 // Obtener los datos del producto desde $_GET
 $fecha_salida = $_GET['fecha_salida'];
 $cantidad_salida = $_GET['cantidad_salida'];
 $id_producto = $_GET['id_producto'];
 $motivo_salida = $_GET['motivo_salida'];
+$descripcion = $_GET['descripcion'];
+
 
 // Consulta de inserción con sentencia preparada
 $sql_insert_salida = "INSERT INTO tbl_salida (fecha_salida, cantidad_salida, id_producto)
@@ -37,12 +41,21 @@ if (mysqli_stmt_execute($stmt_insert)) {
     mysqli_stmt_close($stmt_update_producto);
 }
 
+
 // Cerrar la sentencia preparada de la consulta de inserción y la conexión
 mysqli_stmt_close($stmt_insert);
+
+// Obtener la fecha actual
+  $fecha = date("Y-m-d");
+
+    // Construir la consulta de inserción en tbl_auditoria
+  $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES ('$usuario', '$fecha', 'El usuario [$usuario] registró una salida del producto [$descripcion]')";
+
+  $auditoria = mysqli_query($conexion, $sql_aud);
+
 mysqli_close($conexion);
 
 // Redireccionar a la página de inicio
 header("Location: ../paginas/home.php");
 exit;
 ?>
-

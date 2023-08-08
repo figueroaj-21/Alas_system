@@ -22,8 +22,8 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT p.id_producto, p.codigo, c.clasificacion, p.descripcion, p.observaciones, p.costo, p.existencia, pr.id_proveedor, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor";
-//WHERE estado = 1
+$sql_facturas = "SELECT p.id_producto, p.codigo, c.clasificacion, p.descripcion, p.observaciones, p.costo, p.existencia, p.stock_minimo, pr.id_proveedor, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor WHERE estado_producto = 1";
+//
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
 $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consultar facturas: " . mysqli_error($conexion));
@@ -42,6 +42,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 <html lang="es">
 <head>
   <title>Home</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -141,6 +142,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <th>Observaciones</th>
               <th>Costo</th>
               <th>Exitencia</th>
+              <th>Stock Mínimo</th>
               <th>Proveedor</th>
               <th>Acciones</th>
             </tr>
@@ -155,6 +157,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <th>Observaciones</th>
               <th>Costo</th>
               <th>Existencia</th>
+              <th>Stock Mínimo</th>
               <th>Proveedor</th>
               <th>Acciones</th>
             </tr>
@@ -174,6 +177,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class=""><?php echo $row_factura['observaciones']; ?></td>
                             <td class=""><?php echo $row_factura['costo']; ?></td>
                             <td class=""><?php echo $row_factura['existencia']; ?></td>
+                            <td class=""><?php echo $row_factura['stock_minimo']; ?></td>
                             <td class=""><?php echo $row_factura['nombre_proveedor']; ?></td>
                             <td class=""><!-- Enlace para abrir el modal de modal_entrada.html -->
                             <a class="btn btn-outline-success" href="registro_entrada.php?id_producto=<?php echo $row_factura['id_producto']; ?>&id_proveedor=<?php echo $row_factura['id_proveedor']; ?>" title="Registra una entrada para el producto <?php echo $row_factura["descripcion"]; ?>">
@@ -183,7 +187,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <i class="fa-regular fa-square-minus"></i> 
                             </a>
                             <a class="btn btn-outline-warning" href="form_editar_producto.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Actualiza el registo <?php echo $row_factura["descripcion"]; ?>"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a class="btn btn-outline-dark" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["descripcion"]; ?>" onclick="inhabilitarProducto(<?php echo $row_factura['id_producto']; ?>)">
+                            <a class="btn btn-outline-dark" href="#" title="Inhabilita el registro <?php echo $row_factura["descripcion"]; ?>" onclick="inhabilitarProducto(<?php echo $row_factura['id_producto']; ?>)">
                             <i class="fa-solid fa-ban"></i>
                             </a> 
                         	</td>
@@ -295,6 +299,18 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               </div>
             </div>
             <div class="row mb-3">
+              <label for="stock_minimo" class="col-3 col-form-label">Stock Minimo</label>
+              <div class="col-9">
+                <input type="text" class="form-control" required id="stock_minimo" name="stock_minimo">
+                <div class="valid-feedback">
+                  Ok.
+                </div>
+                <div class="invalid-feedback">
+                 Debe Ingresar un Stock Minimo.
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
               <label for="nombre_proveedor" class="col-3 col-form-label">Proveedor</label>
               <div class="col-9">
               <select class="form-control" required name="id_proveedor" id="id_proveedor">
@@ -320,8 +336,6 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 						 } else {
 						    echo '<option value="">No hay registros disponibles</option>';
 						 }
-			            // Cierra la conexión
-			            mysqli_close($conexion);
 			            ?>
                 </select>
                 <div class="valid-feedback">
@@ -336,6 +350,15 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <label for="observaciones" class="col-3 col-form-label">Observaciones</label>
               <div class="col-9">
                 <input type="text" class="form-control" id="observaciones" name="observaciones">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="estado_producto" class="col-3 col-form-label">Estado</label>
+              <div class="col-9">
+                <select class="form-control" id="estado_producto" name="estado_producto">
+				    <option value="1">Habilitado</option>
+				    <option value="0">Inhabilitado</option>
+				</select>
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Confirmar</button>
@@ -377,7 +400,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 function inhabilitarProducto(idProducto) {
   // Realizar una solicitud AJAX a un archivo PHP para habilitar/inhabilitar el registro
 
-  const url = "../php/inabilitar_producto.php?id_producto=" + idProducto;
+  const url = "../php/inhabilitar_producto.php?id_producto=" + idProducto;
   
   // Realizar la solicitud AJAX
   fetch(url, { method: "POST" })
@@ -403,7 +426,10 @@ function inhabilitarProducto(idProducto) {
 }
 </script>
 
+<?php
+	// Cierra la conexión
+	mysqli_close($conexion);
+?>
+
 </body>
 </html>
-
-    

@@ -29,7 +29,7 @@ if ($_POST) {
             $_SESSION['apellido_usuario'] = $row['apellido_usuario'];
 
             // Obtener la fecha actual
-            $fecha = date("Y-m-d H:i:s");
+            $fecha = date("Y-m-d");
 
             // Construir la consulta de inserción
             $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES (?, ?, ?)";

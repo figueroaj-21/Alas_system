@@ -7,7 +7,7 @@ if (isset($_GET['id_producto']) && is_numeric($_GET['id_producto'])) {
     $id_producto = $_GET['id_producto'];
 
     // Consulta para obtener los datos del producto por su ID
-    $sql = "SELECT p.codigo, p.descripcion, p.costo, p.existencia, p.observaciones, c.clasificacion, pr.nombre_proveedor
+    $sql = "SELECT p.codigo, p.descripcion, p.costo, p.stock_minimo, p.observaciones, c.clasificacion, pr.nombre_proveedor
         FROM tbl_productos p
         INNER JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion
         INNER JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor
@@ -20,7 +20,7 @@ if (isset($_GET['id_producto']) && is_numeric($_GET['id_producto'])) {
         $codigo = $row['codigo'];
         $descripcion = $row['descripcion'];
         $costo = $row['costo'];
-        $existencia = $row['existencia'];
+        $stock_minimo = $row['stock_minimo'];
         $observaciones = $row['observaciones'];
         $clasificacion = $row['clasificacion'];
         $nombre_proveedor = $row['nombre_proveedor'];
@@ -40,6 +40,7 @@ if (isset($_GET['id_producto']) && is_numeric($_GET['id_producto'])) {
 <html lang="es">
 <head>
   <title>Editar Producto</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -92,8 +93,8 @@ if (isset($_GET['id_producto']) && is_numeric($_GET['id_producto'])) {
       </div>
     </div>
     <div class="form-group">
-      <label for="existencia">Existencia:</label>
-      <input type="number" class="form-control" required id="existencia" name="existencia" value="<?php echo $existencia; ?>">
+      <label for="estock_minimo">Stock Mínimo:</label>
+      <input type="number" class="form-control" required id="stock_minimo" name="stock_minimo" value="<?php echo $stock_minimo; ?>">
       <div class="valid-feedback">
         Ok.
       </div>

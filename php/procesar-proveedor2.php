@@ -19,6 +19,7 @@ $nombre_proveedor = validarDatos($_POST["nombre_proveedor"]);
 $persona_contacto = validarDatos($_POST["persona_contacto"]);
 $numero_contacto = validarDatos($_POST["numero_contacto"]);
 $correo_proveedor = validarDatos($_POST["correo_proveedor"]);
+$estado_proveedor = validarDatos($_POST["estado_proveedor"]);
 
 // Verifica si el proveedor ya está registrado
 $sql = "SELECT * FROM tbl_proveedores WHERE rif_proveedor = ?";
@@ -39,10 +40,10 @@ if (mysqli_num_rows($resultado) > 0) {
 }
 
 // Inserta los datos en la base de datos
-$sql = "INSERT INTO tbl_proveedores (rif_proveedor, nombre_proveedor, persona_contacto, numero_contacto, correo_proveedor)
-        VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO tbl_proveedores (rif_proveedor, nombre_proveedor, persona_contacto, numero_contacto, correo_proveedor, estado_proveedor)
+        VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conexion, $sql);
-mysqli_stmt_bind_param($stmt, "sssss", $rif_proveedor, $nombre_proveedor, $persona_contacto, $numero_contacto, $correo_proveedor);
+mysqli_stmt_bind_param($stmt, "sssssi", $rif_proveedor, $nombre_proveedor, $persona_contacto, $numero_contacto, $correo_proveedor, $estado_proveedor);
 $resul = mysqli_stmt_execute($stmt);
 
 if ($resul) {

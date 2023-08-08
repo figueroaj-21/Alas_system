@@ -22,6 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 direccion_usuario = '$direccion_usuario'
             WHERE id_usuario = $id_usuario";
 
+    // Obtener la fecha actual
+    $fecha = date("Y-m-d");
+
+    // Construir la consulta de inserción en tbl_auditoria
+    $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES ('$usuario', '$fecha', 'El usuario [$usuario] actualizo al usuario [$login_usuario]')";
+
+    $auditoria = mysqli_query($conexion, $sql_aud);
+
     if (mysqli_query($conexion, $sql)) {
         echo ' 
             <script>

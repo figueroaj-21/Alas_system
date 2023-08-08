@@ -22,6 +22,8 @@ $nombre_usuario = validarDatos($_POST["nombre_usuario"]);
 $apellido_usuario = validarDatos($_POST["apellido_usuario"]);
 $correo_usuario = validarDatos($_POST["correo_usuario"]);
 $direccion_usuario = validarDatos($_POST["direccion_usuario"]);
+$nivel_usuario = validarDatos($_POST["nivel_usuario"]);
+$estado_usuario = validarDatos($_POST["estado_usuario"]);
 
 // Verifica si el usuario ya está registrado
 $verificar_cedula = mysqli_query($conexion, "SELECT * FROM tbl_usuarios WHERE cedula_usuario = '$cedula_usuario'");
@@ -39,8 +41,8 @@ if (mysqli_num_rows($verificar_cedula) > 0) {
 $hash_contrasena = password_hash($clave_usuario, PASSWORD_DEFAULT);
 
 // Inserta los datos en la base de datos
-$sql = "INSERT INTO tbl_usuarios (login_usuario, clave_usuario, cedula_usuario, nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario)
-        VALUES ('$login_usuario', '$hash_contrasena', '$cedula_usuario', '$nombre_usuario', '$apellido_usuario', '$correo_usuario', '$direccion_usuario')";
+$sql = "INSERT INTO tbl_usuarios (login_usuario, clave_usuario, cedula_usuario, nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario, nivel_usuario, estado_usuario)
+        VALUES ('$login_usuario', '$hash_contrasena', '$cedula_usuario', '$nombre_usuario', '$apellido_usuario', '$correo_usuario', '$direccion_usuario', '$nivel_usuario', '$estado_usuario')";
 
 $resul = mysqli_query($conexion, $sql);
 

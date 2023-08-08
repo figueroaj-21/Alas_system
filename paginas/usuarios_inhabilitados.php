@@ -23,7 +23,7 @@
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
 $sql_facturas = "SELECT id_usuario, login_usuario, cedula_usuario,
-                        nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario, nivel_usuario FROM tbl_usuarios WHERE estado_usuario = 1";
+                        nombre_usuario, apellido_usuario, correo_usuario, direccion_usuario FROM tbl_usuarios WHERE estado_usuario = 0";
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
 $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consultar facturas: " . mysqli_error($conexion));
@@ -41,7 +41,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Consulta Usuarios</title>
+  <title>Usuarios Inhabilitados</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -119,10 +119,10 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
-        <h1>Usuarios</h1>
+        <h1>Usuarios Inhabilitados</h1>
         <br>
-        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo Usuario
-        <i class="fa fa-plus"></i></a>
+        <a href="../reportes/reporte_productos.php" target="_blank" class="btn btn-danger">PDF
+        <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 
         <table
@@ -138,8 +138,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Correo</th>
-              <th>Dirección</th>
-              <th>Nivel</th>
+              <th>Direccion</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -152,8 +151,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
               <th>Nombre</th>
               <th>Nombre</th>
               <th>Correo</th>
-              <th>Dirección</th>
-              <th>Nivel</th>
+              <th>Correo</th>
               <th>Acciones</th>
             </tr>
           </tfoot>
@@ -172,9 +170,9 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_izq"><?php echo $row_factura['apellido_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['correo_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['direccion_usuario']; ?></td>
-                            <td class="fila_datos texto_izq"><?php echo $row_factura['nivel_usuario']; ?></td>
-                            <td class="fila_datos texto_izq"><a class="btn btn-outline-info" href="form_editar_usuario.php?id_usuario=<?php echo $row_factura['id_usuario']; ?>"><i class="fa-solid fa-user-pen"></i></a>
-                            <a class="btn btn-outline-danger" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["login_usuario"]; ?>" onclick="inhabilitarUsuario(<?php echo $row_factura['id_usuario']; ?>)"><i class="fa-solid fa-user-lock"></i></a>
+                            <td class="fila_datos texto_izq">
+                            <a class="btn btn-outline-danger" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["login_usuario"]; ?>" onclick="inhabilitarUsuario(<?php echo $row_factura['id_usuario']; ?>)">
+                            	<i class="fa-solid fa-user-lock"></i></a>
                             </td>
                         </tr>
                         <?php
@@ -186,155 +184,6 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         </table>
       </div>
     </div>  
-
-<!-- Modal de Registro de Provedor -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro Usuario</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-
-          <form class="needs-validation" novalidate action="../php/procesar-usuario3.php" method="POST">
-            <div class="row mb-4">
-              <label for="usuario" class="col-3 col-form-label">Usuario</label>
-              <div class="col-9">
-                <input type="text" class="form-control" required id="login_usuario" name="login_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                  Debe Ingresar un Nombre de Usuario.
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="clave_usuario" class="col-3 col-form-label">Clave</label>
-              <div class="col-9">
-                <input type="password" class="form-control" required id="clave_usuario" name="clave_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                 Debe Ingresar su Clave.
-              </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-              <label for="cedula_usuario" class="col-3 col-form-label">Cedula</label>
-              <div class="col-9">
-                <input type="text" class="form-control" required id="cedula_usuario" name="cedula_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                  Debe Ingresar su Numero de Cédula.
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="nombre_usuario" class="col-3 col-form-label">Nombre</label>
-              <div class="col-9">
-                <input type="text" class="form-control" required id="nombre_usuario" name="nombre_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                  Debe Ingresar su Nombre.
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="apellido_usuario" class="col-3 col-form-label">Apellido</label>
-              <div class="col-9">
-                <input type="text" class="form-control" required id="apellido_usuario" name="apellido_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                 Debe Ingresar su Apellido.
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="correo_usuario" class="col-3 col-form-label">Correo</label>
-              <div class="col-9">
-                <input type="email" class="form-control" required id="correo_usuario" name="correo_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                  Debe Ingresar su Correo.
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="direccion_usuario" class="col-3 col-form-label">Dirección</label>
-              <div class="col-9">
-                <input type="text" class="form-control" required id="direccion_usuario" name="direccion_usuario">
-                <div class="valid-feedback">
-                  Ok.
-                </div>
-                <div class="invalid-feedback">
-                  Debe Ingresar su Dirección.
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="nivel_usuario" class="col-3 col-form-label">Nivel</label>
-              <div class="col-9">
-                <select class="form-control" id="nivel_usuario" name="nivel_usuario">
-				    <option value="1">Usuario</option>
-				    <option value="2">Administrador</option>
-				</select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="estado_usuario" class="col-3 col-form-label">Estado</label>
-              <div class="col-9">
-                <select class="form-control" id="estado_usuario" name="estado_usuario">
-				    <option value="1">Habilitado</option>
-				    <option value="0">Inhabilitado</option>
-				</select>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Confirmar</button>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-
-</script>
 
 <script>
       function inhabilitarUsuario(idUsuario) {
@@ -349,9 +198,9 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
             if (data.success) {
               // Si la operación fue exitosa, puedes realizar alguna acción aquí, como recargar la tabla de productos
               if (data.estado == 1) {
-                alert("Usuario habilitado correctamente.");
+                alert("Usuario Inhabilitado correctamente.");
               } else {
-                alert("Usuario inhabilitado correctamente.");
+                alert("Usuario Habilitado correctamente.");
               }
               window.location.reload(); // Recarga la página para reflejar los cambios
             } else {

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codigo = $_POST['codigo'];
     $descripcion = $_POST['descripcion'];
     $costo = $_POST['costo'];
-    $existencia = $_POST['existencia'];
+    $stock_minimo = $_POST['stock_minimo'];
     $observaciones = $_POST['observaciones'];
     $id_clasificacion = $_POST['id_clasificacion'];
     $id_proveedor = $_POST['id_proveedor'];
@@ -20,11 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 codigo = '$codigo',
                 descripcion = '$descripcion',
                 costo = '$costo',
-                existencia = $existencia,
+                stock_minimo = $stock_minimo,
                 observaciones = '$observaciones',
                 id_clasificacion = '$id_clasificacion',
                 id_proveedor = $id_proveedor
             WHERE id_producto = $id_producto";
+
+    // Obtener la fecha actual
+    $fecha = date("Y-m-d");
+
+    // Construir la consulta de inserción en tbl_auditoria
+    $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES ('$usuario', '$fecha', 'El usuario [$usuario] actualizo el producto [$descripcion]')";
+
+    $auditoria = mysqli_query($conexion, $sql_aud);
 
     if (mysqli_query($conexion, $sql)) {
         echo ' 

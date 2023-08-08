@@ -21,8 +21,10 @@ function validarDatos($dato)
     $descripcion = validarDatos($_POST["descripcion"]);
     $costo = validarDatos($_POST["costo"]);
     $existencia = validarDatos($_POST["existencia"]);
+    $stock_minimo = validarDatos($_POST["stock_minimo"]);
     $id_proveedor = validarDatos($_POST["id_proveedor"]);
     $observaciones = validarDatos($_POST["observaciones"]);
+    $estado_producto = validarDatos($_POST["estado_producto"]);
 
 // Verifica si el producto ya está registrado
 $verificar_producto = mysqli_query($conexion, "SELECT * FROM tbl_productos WHERE codigo = '$codigo'");
@@ -37,7 +39,7 @@ if (mysqli_num_rows($verificar_producto) > 0) {
 }
 
 // Realiza la inserción en la base de datos (sustituye 'nombre_tabla' por el nombre de tu tabla)
-    $sql_insert = "INSERT INTO tbl_productos (codigo, descripcion, costo, existencia, observaciones, id_clasificacion, id_proveedor, id_usuario) VALUES ('$codigo', '$descripcion', '$costo', '$existencia', '$observaciones', '$id_clasificacion', '$id_proveedor', '$id_usuario')";
+    $sql_insert = "INSERT INTO tbl_productos (codigo, descripcion, costo, existencia, stock_minimo, observaciones, id_clasificacion, id_proveedor, id_usuario, estado_producto) VALUES ('$codigo', '$descripcion', '$costo', '$existencia', '$stock_minimo', '$observaciones', '$id_clasificacion', '$id_proveedor', '$id_usuario', '$estado_producto')";
     $result_insert = mysqli_query($conexion, $sql_insert);
 
 if ($sql_insert) {

@@ -41,6 +41,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 <html lang="es">
 <head>
   <title>Consulta Clasificación</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
