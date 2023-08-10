@@ -22,7 +22,7 @@
 
 // 2. Estructura una consulta SQL
 //    Muestra las facturas y sus clientes, ordenadas por número de factura, en orden descendente
-$sql_facturas = "SELECT p.id_producto, p.codigo, c.clasificacion, p.descripcion, p.observaciones, p.costo, p.existencia, p.stock_minimo, pr.id_proveedor, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor WHERE estado_producto = 0";
+$sql_facturas = "SELECT p.id_producto, p.codigo, c.clasificacion, p.descripcion, p.costo, p.existencia, p.stock_minimo, pr.id_proveedor, pr.nombre_proveedor FROM tbl_productos p JOIN tbl_clasificacion c ON p.id_clasificacion = c.id_clasificacion JOIN tbl_proveedores pr ON p.id_proveedor = pr.id_proveedor WHERE existencia < stock_minimo";
 //
 
 // 3. Ejecuta la consulta y almacena el resultado devuelto en la variable $rcs_facturas
@@ -31,17 +31,15 @@ $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consulta
 // 4. Obtiene la cantidad de registros devueltos
 $num_reg = mysqli_num_rows($rcs_facturas);
 
-/* 5. Muestra los registros devueltos por la consulta */
+  // Cierra la conexión
+  mysqli_close($conexion);
 
-// 5.1 Evalúa el total de registros devueltos
-//     Asigna a la variable $muestra_tabla el valor devuelto al evaluar la condición
-//     Utiliza un Operador Ternario
-$muestra_tabla = ($num_reg > 0) ? true : false;
 ?>
+
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Productos Ihabilitados</title>
+  <title>Productos Bajo Stock Mínimo</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -49,10 +47,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
   <!-- Botones -->
     <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
-     <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
 
-    <!-- Enlaces a Bootstrap 4 -->
-        <script src="./Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
 
     <!-- Enlace a Bootstrap web-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -64,7 +59,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
     <!-- Invoca y Traduce al metodo DataTable() -->
     <script>
       $(function () {
-        $("#tbl_usuarios").DataTable({
+        $("#productos_stock_minimo").DataTable({
           language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
@@ -120,44 +115,38 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
-        <h1>Productos Inhabilitados</h1>
+        <h1>Productos Bojo Stock Mínimo</h1>
         <br>
-        <a href="../reportes/reporte_productos.php" target="_blank" class="btn btn-danger">PDF
+        <a href="../reportes/#" target="_blank" class="btn btn-danger">PDF
         <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 
         <table
-          id="tbl_usuarios"
+          id="productos_stock_minimo"
           class="table table-striped table-hover dt-responsive nowrap display"
           style="width: 100%"
         >
           <thead>
             <tr>
-              <th>ID</th>
               <th>Codigo</th>
               <th>Clasificacion</th>
               <th>Descripcion</th>
-              <th>Observaciones</th>
               <th>Costo</th>
               <th>Exitencia</th>
               <th>Stock Mínimo</th>
               <th>Proveedor</th>
-              <th>Acciones</th>
             </tr>
           </thead>
 
           <tfoot>
             <tr>
-              <th>ID</th>
               <th>Codigo</th>
               <th>Clasificacion</th>
               <th>Descripcion</th>
-              <th>Observaciones</th>
               <th>Costo</th>
               <th>Existencia</th>
               <th>Stock Mínimo</th>
               <th>Proveedor</th>
-              <th>Acciones</th>
             </tr>
           </tfoot>
 
@@ -168,20 +157,13 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                     while($row_factura = mysqli_fetch_array($rcs_facturas, MYSQLI_ASSOC)) {
                     ?>
                         <tr>
-                            <td class=""><?php echo $row_factura['id_producto']; ?></td>
                             <td class=""><?php echo $row_factura['codigo']; ?></td>
                             <td class=""><?php echo $row_factura['clasificacion']; ?></td>
                             <td class=""><?php echo $row_factura['descripcion']; ?></td>
-                            <td class=""><?php echo $row_factura['observaciones']; ?></td>
-                            <td class=""><?php echo $row_factura['costo']; ?></td>
+                            <td class=""><?php echo $row_factura['costo'];?></td>
                             <td class=""><?php echo $row_factura['existencia']; ?></td>
                             <td class=""><?php echo $row_factura['stock_minimo']; ?></td>
                             <td class=""><?php echo $row_factura['nombre_proveedor']; ?></td>
-                            <td class=""><!-- Enlace para abrir el modal de modal_entrada.html -->
-                            <a class="btn btn-outline-dark" href="#" title="Habilitar el registro <?php echo $row_factura["descripcion"]; ?>" onclick="inhabilitarProducto(<?php echo $row_factura['id_producto']; ?>)">
-                            <i class="fa-solid fa-ban"></i>
-                            </a> 
-                        	</td>
                         </tr>
                         <?php
                         $i++;
@@ -192,36 +174,6 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         </table>
       </div>
     </div>
-
-<script>
-function inhabilitarProducto(idProducto) {
-  // Realizar una solicitud AJAX a un archivo PHP para habilitar/inhabilitar el registro
-
-  const url = "../php/inhabilitar_producto.php?id_producto=" + idProducto;
-  
-  // Realizar la solicitud AJAX
-  fetch(url, { method: "POST" })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        // Si la operación fue exitosa, puedes realizar alguna acción aquí, como recargar la tabla de productos
-        if (data.estado == 1) {
-          alert("Producto Inhabilitado correctamente.");
-        } else {
-          alert("Producto Habilitado correctamente.");
-        }
-        window.location.reload(); // Recarga la página para reflejar los cambios
-      } else {
-        // Si la operación falló, muestra un mensaje de error
-        alert("Error al cambiar el estado del producto. Inténtalo de nuevo más tarde.");
-      }
-    })
-    .catch(error => {
-      console.error("Error al realizar la solicitud AJAX: ", error);
-      alert("Ha ocurrido un error inesperado. Inténtalo de nuevo más tarde.");
-    });
-}
-</script>
 
 </body>
 </html>

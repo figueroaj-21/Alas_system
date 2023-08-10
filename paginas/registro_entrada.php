@@ -1,3 +1,11 @@
+<?php require "../php/seguridad.php";  
+  require "../php/conexion.php";
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
+  $login_usuario = $_SESSION['login_usuario'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,9 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Entradas</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
+
+  <?php require "../html/nav2.html"; ?>
+  <br>
+
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">

@@ -2,7 +2,7 @@
   require "../php/conexion.php";
   $nombre_usuario = $_SESSION['nombre_usuario'];
   $apellido_usuario = $_SESSION['apellido_usuario'];
-  //$tipo_rol = $_SESSION['tipo_rol'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
 ?>
 <?php
 /**

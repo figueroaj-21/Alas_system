@@ -1,3 +1,11 @@
+<?php require "../php/seguridad.php";  
+  require "../php/conexion.php";
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
+  $login_usuario = $_SESSION['login_usuario'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
+?>
+
 <?php
 require "../html/nav2.html";
 require "../php/conexion.php";

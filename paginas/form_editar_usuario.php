@@ -1,6 +1,12 @@
-<?php
-require "../html/nav2.html";
+<?php require "../php/seguridad.php"; 
+
 require "../php/conexion.php";
+$nombre_usuario = $_SESSION['nombre_usuario'];
+$apellido_usuario = $_SESSION['apellido_usuario'];
+$login_usuario = $_SESSION['login_usuario'];
+$nivel_usuario = $_SESSION['nivel_usuario'];
+
+require "../html/nav2.html";
 
 // Verificar si se ha enviado un ID de usuario válido desde otra página
 if (isset($_GET['id_usuario']) && is_numeric($_GET['id_usuario'])) {
@@ -39,9 +45,7 @@ if (isset($_GET['id_usuario']) && is_numeric($_GET['id_usuario'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Enlaces a Bootstrap 4 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  
   <!-- Estilos adicionales -->
   <style>
     .container {

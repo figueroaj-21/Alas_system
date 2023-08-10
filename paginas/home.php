@@ -3,7 +3,7 @@
   $nombre_usuario = $_SESSION['nombre_usuario'];
   $apellido_usuario = $_SESSION['apellido_usuario'];
   $login_usuario = $_SESSION['login_usuario'];
-  //$tipo_rol = $_SESSION['tipo_rol'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
   
 /**
  * connect_struct_consulta_basedatos.php
@@ -31,12 +31,7 @@ $rcs_facturas = mysqli_query($conexion, $sql_facturas) or die("Error al consulta
 // 4. Obtiene la cantidad de registros devueltos
 $num_reg = mysqli_num_rows($rcs_facturas);
 
-/* 5. Muestra los registros devueltos por la consulta */
 
-// 5.1 Evalúa el total de registros devueltos
-//     Asigna a la variable $muestra_tabla el valor devuelto al evaluar la condición
-//     Utiliza un Operador Ternario
-$muestra_tabla = ($num_reg > 0) ? true : false;
 ?>
 <!doctype html>
 <html lang="es">
@@ -49,10 +44,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 
   <!-- Botones -->
     <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
-     <script src="./jQuery-3.3.1/jquery-3.3.1.min.js"></script>
 
-    <!-- Enlaces a Bootstrap 4 -->
-        <script src="./Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
 
     <!-- Enlace a Bootstrap web-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -186,10 +178,12 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <a class="btn btn-outline-danger" href="registro_salidas.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Registra una salida para el producto <?php echo $row_factura["descripcion"]; ?>">
                             <i class="fa-regular fa-square-minus"></i> 
                             </a>
+                            <?php if($nivel_usuario==2){ ?>
                             <a class="btn btn-outline-warning" href="form_editar_producto.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Actualiza el registo <?php echo $row_factura["descripcion"]; ?>"><i class="fa-regular fa-pen-to-square"></i></a>
                             <a class="btn btn-outline-dark" href="#" title="Inhabilita el registro <?php echo $row_factura["descripcion"]; ?>" onclick="inhabilitarProducto(<?php echo $row_factura['id_producto']; ?>)">
                             <i class="fa-solid fa-ban"></i>
                             </a> 
+                             <?php } ?>
                         	</td>
                         </tr>
                         <?php
@@ -319,7 +313,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
 			            require_once '../php/conexion.php';
 
 			            // Consulta para obtener los registros de la base de datos
-			            $sql = "SELECT id_proveedor, nombre_proveedor FROM tbl_proveedores"; 
+			            $sql = "SELECT id_proveedor, nombre_proveedor, estado_proveedor FROM tbl_proveedores WHERE estado_proveedor = 1"; 
 
 			            // Ejecuta la consulta
 			            $result = mysqli_query($conexion, $sql);

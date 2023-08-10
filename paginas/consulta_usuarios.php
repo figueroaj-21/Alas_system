@@ -3,6 +3,7 @@
   $nombre_usuario = $_SESSION['nombre_usuario'];
   $apellido_usuario = $_SESSION['apellido_usuario'];
   $login_usuario = $_SESSION['login_usuario'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
 ?>
 <?php
 /**

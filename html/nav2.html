@@ -2,7 +2,10 @@
 
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href=../paginas/home.php>Alas Servicios y Suministros 2130</a>
+    <a class="navbar-brand" href="../paginas/home.php">
+        <img src="../img/logoalas_menu.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        Alas Servicios y Suministros 2130
+     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,11 +30,14 @@
               Reportes
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">Productos en Stock Mínimo</a></li>
-              <li><a class="dropdown-item" href="#">Entradas por Periodo</a></li>
-              <li><a class="dropdown-item" href="../php/salidas_por_periodo.php">Salidas por Periodo</a></li>
+              <li><a class="dropdown-item" href="./consulta_stock_minimo.php">Productos en Stock Mínimo</a></li>
+              <li><a class="dropdown-item" href="../paginas/entradas_por_periodo.php">Entradas por Periodo</a></li>
+              <li><a class="dropdown-item" href="../paginas/salidas_por_periodo.php">Salidas por Periodo</a></li>
             </ul>
           </li>
+
+          <?php if($nivel_usuario==2){ ?>
+
            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Mantenimiento
@@ -39,7 +45,7 @@
             <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="../paginas/consulta_usuarios.php">Gestionar Usuario</a></li>
               <li><a class="dropdown-item" href="../paginas/usuarios_inhabilitados.php">Usuarios Inhabilitados</a></li>
-              <li><a class="dropdown-item" href="../paginas/respaldo_db.php">Respaldo de la Base de Datos</a></li>
+              <li><a class="dropdown-item" href="../respaldo/respaldo_bd.php">Respaldo de la Base de Datos</a></li>
               <li><a class="dropdown-item" href="../paginas/consulta_auditoria.php">Bitácora del Sistema</a></li>
             </ul>
           </li>
@@ -51,6 +57,12 @@
               <li><a class="dropdown-item" href="../paginas/productos_inhabilitados.php">Productos Inhabilitados</a></li>
               <li><a class="dropdown-item" href="../paginas/proveedores_inhabilitados.php">Proveedores Inhabilitados</a></li>
             </ul>
+          </li>
+
+          <?php } ?>
+
+          <li class="nav-item">
+            <a class="nav-link" href="../paginas/cambio_password.php">Cambio de Contraseña</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Ayuda</a>

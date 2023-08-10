@@ -3,6 +3,7 @@
   $nombre_usuario = $_SESSION['nombre_usuario'];
   $apellido_usuario = $_SESSION['apellido_usuario'];
   $login_usuario = $_SESSION['login_usuario'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
 ?>
 <?php
 /**
@@ -163,7 +164,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_cen"><?php echo $row_factura['persona_contacto']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['correo_proveedor']; ?></td>
                             <td>
-                            <a class="btn btn-outline-danger" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["nombre_proveedor"]; ?>" onclick="inhabilitarProveedor(<?php echo $row_factura['id_proveedor']; ?>)">
+                            <a class="btn btn-outline-danger" href="#" title="Habilitar el registro <?php echo $row_factura["nombre_proveedor"]; ?>" onclick="inhabilitarProveedor(<?php echo $row_factura['id_proveedor']; ?>)">
                             <i class="fa-solid fa-user-large-slash"></i></a>
                             </td>
                         </tr>

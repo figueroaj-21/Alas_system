@@ -1,5 +1,4 @@
 <?php
-
 require "conexion.php";
 session_start();
 
@@ -7,7 +6,7 @@ if ($_POST) {
     $login_usuario = $_POST['login_usuario'];
     $password = $_POST['clave_usuario'];
 
-    $sql = "SELECT id_usuario, login_usuario, clave_usuario, nombre_usuario, apellido_usuario FROM tbl_usuarios WHERE login_usuario=?";
+    $sql = "SELECT id_usuario, login_usuario, clave_usuario, nombre_usuario, apellido_usuario, nivel_usuario, estado_usuario FROM tbl_usuarios WHERE login_usuario=?";
     
     // Preparar la consulta
     $stmt = mysqli_prepare($conexion, $sql);
@@ -20,6 +19,14 @@ if ($_POST) {
     if ($resultado->num_rows > 0) {
         $row = $resultado->fetch_assoc();
         $password_db = $row['clave_usuario'];
+        $estado_usuario = $row['estado_usuario'];
+
+        // Verificar si el usuario está inhabilitado
+        if ($estado_usuario == 0) {
+            echo '<script>alert("Su usuario ha sido inhabilitado");</script>';
+            echo '<script>window.location = "../index.html";</script>';
+            exit();
+        }
 
         // Verificar la contraseña utilizando password_verify()
         if (password_verify($password, $password_db)) {
@@ -27,6 +34,7 @@ if ($_POST) {
             $_SESSION['login_usuario'] = $row['login_usuario'];
             $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
             $_SESSION['apellido_usuario'] = $row['apellido_usuario'];
+            $_SESSION['nivel_usuario'] = $row['nivel_usuario'];
 
             // Obtener la fecha actual
             $fecha = date("Y-m-d");
@@ -56,5 +64,4 @@ if ($_POST) {
 
     echo '<script>window.location = "../index.html";</script>';
 }
-
 ?>
