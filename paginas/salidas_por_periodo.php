@@ -1,33 +1,35 @@
-<?php
-require "../php/seguridad.php";  
-require "../php/conexion.php";
-$nombre_usuario = $_SESSION['nombre_usuario'];
-$apellido_usuario = $_SESSION['apellido_usuario'];
-$login_usuario = $_SESSION['login_usuario'];
-$nivel_usuario = $_SESSION['nivel_usuario'];
+<?php require "../php/seguridad.php";  
+  require "../php/conexion.php";
+  $nombre_usuario = $_SESSION['nombre_usuario'];
+  $apellido_usuario = $_SESSION['apellido_usuario'];
+  $login_usuario = $_SESSION['login_usuario'];
+  $nivel_usuario = $_SESSION['nivel_usuario'];
+  
 ?>
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Salidas Por Periodos</title>
+  <title>Home</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Enlaces a Bootstrap web-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <!-- Botones -->
+    <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
 
-  <!-- Enlaces a DataTables CSS y JS -->
-  <link rel="stylesheet" href="./datatables.min.css" />
-  <script src="./datatables.min.js"></script>
+
+    <!-- Enlace a Bootstrap web-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
-<body> 
+<body>
+
   <?php require "../html/nav2.html"; ?>
-  <br>
-  <!-- Centrar el formulario -->
-  <div class="container mt-5">
+<br>
+<br>
+<!-- Centrar el formulario -->
+<div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <!-- Formulario -->
@@ -52,8 +54,5 @@ $nivel_usuario = $_SESSION['nivel_usuario'];
     </div>
   </div>
 
-  <!-- Scripts de Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

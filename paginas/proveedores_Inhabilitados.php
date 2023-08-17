@@ -120,7 +120,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
       <div class="col-md-12 col-md-offset-2">
         <h1>Proveedores Inhabilitados</h1>
         <br>
-        <a href="../reportes/reporte_productos.php" target="_blank" class="btn btn-danger">PDF
+        <a href="../reportes/reporte_proveedores_inhabilitados.php" target="_blank" class="btn btn-danger">PDF
         <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 

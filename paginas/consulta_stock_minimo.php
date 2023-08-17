@@ -39,7 +39,7 @@ $num_reg = mysqli_num_rows($rcs_facturas);
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Productos Bajo Stock Mínimo</title>
+  <title>Productos Stock Mínimo</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -115,9 +115,9 @@ $num_reg = mysqli_num_rows($rcs_facturas);
 
  <div class="container">
       <div class="col-md-12 col-md-offset-2">
-        <h1>Productos Bojo Stock Mínimo</h1>
+        <h1>Productos Bajo Stock Mínimo</h1>
         <br>
-        <a href="../reportes/#" target="_blank" class="btn btn-danger">PDF
+        <a href="../reportes/reporte_stock_minimo.php" target="_blank" class="btn btn-danger">PDF
         <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 

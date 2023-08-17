@@ -79,13 +79,13 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="motivo_salida" class="form-label">Motivo de la Salida</label>
-                <input type="text" class="form-control" required id="motivo_salida" name="motivo_salida">
+                <label for="factura_venta" class="form-label">Orden de Salida</label>
+                <input type="text" class="form-control" required id="factura_venta" name="factura_venta">
                 <div class="valid-feedback">
                   Ok.
                 </div>
                 <div class="invalid-feedback">
-                  Debe Ingresar un Motivo.
+                  Debe Ingresar una Orden.
                 </div>
               </div>
 

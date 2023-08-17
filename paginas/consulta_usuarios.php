@@ -124,6 +124,8 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         <br>
         <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo Usuario
         <i class="fa fa-plus"></i></a>
+        <a href="../reportes/reporte_usuarios.php" target="_blank" class="btn btn-danger">PDF
+        <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 
         <table

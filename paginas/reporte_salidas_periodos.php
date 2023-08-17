@@ -10,7 +10,7 @@ $fecha_inicio = $_POST['fecha_inicio'];
 $fecha_fin = $_POST['fecha_fin'];
 
 // Consulta para obtener los registros de la tabla tbl_salida en el rango de fechas seleccionado
-$sql_reporte = "SELECT e.id_salida, e.fecha_salida, e.cantidad_salida, e.id_producto, p.descripcion FROM tbl_salida e 
+$sql_reporte = "SELECT e.id_salida, e.fecha_salida, e.cantidad_salida, e.factura_venta, e.id_producto, p.descripcion FROM tbl_salida e 
    JOIN tbl_productos p ON e.id_producto = p.id_producto 
    WHERE e.fecha_salida BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 
@@ -31,6 +31,8 @@ mysqli_close($conexion);
 
   <!-- Enlaces a Bootstrap web-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+  <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
 
   <!-- Enlace a DataTables CSS y JS -->
     <link rel="stylesheet" href="./datatables.min.css" />
@@ -96,8 +98,8 @@ mysqli_close($conexion);
   <div class="container mt-5">
     <h2>Reporte de Salidas por Periodo</h2>
     <br>
-    <a href="#" target="_blank" class="btn btn-danger">PDF
-        <i class="fa-solid fa-file-lines"></i>
+    <a  href="../reportes/reporte_salidas_por_periodo.php?fecha_inicio=<?php echo urlencode($fecha_inicio); ?>&fecha_fin=<?php echo urlencode($fecha_fin); ?>" target="_blank" class="btn btn-danger">PDF
+      <i class="fa-solid fa-file-lines"></i>
     </a>
     <hr>
     <?php if (mysqli_num_rows($resultado) > 0) { ?>
@@ -109,6 +111,7 @@ mysqli_close($conexion);
             <th>Fecha Salida</th>
             <th>Cantidad Salida</th>
             <th>Descripción</th>
+            <th>Número de Factura</th>
           </tr>
         </thead>
 
@@ -118,6 +121,7 @@ mysqli_close($conexion);
             <th>Fecha Salida</th>
             <th>Cantidad Salida</th>
             <th>Descripción</th>
+            <th>Número de Factura</th>
           </tr>
         </tfoot>
 
@@ -128,6 +132,8 @@ mysqli_close($conexion);
               <td><?php echo $fila['fecha_salida']; ?></td>
               <td><?php echo $fila['cantidad_salida']; ?></td>
               <td><?php echo $fila['descripcion']; ?></td>
+              <td><?php echo $fila['factura_venta']; ?></td>
+
             </tr>
           <?php } ?>
         </tbody>

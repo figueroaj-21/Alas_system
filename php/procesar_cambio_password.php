@@ -35,6 +35,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['id_usuario'])) {
                             alert("Contraseña Actualizada exitosamente");
                             window.location = "../paginas/cambio_password.php";
                           </script>';
+                    
+                    // Obtener la fecha actual
+                    $fecha = date("Y-m-d");
+                    $usuario = $_SESSION['login_usuario'];
+                    
+                    // Construir la consulta de inserción en tbl_auditoria
+                    $accion_aud = "El usuario [$usuario] actualizó su contraseña";
+                    $sql_aud = "INSERT INTO tbl_auditoria (usuario_aud, tiemporegistro_aud, accion_aud) VALUES (?, ?, ?)";
+                    $stmt_aud = mysqli_prepare($conexion, $sql_aud);
+                    mysqli_stmt_bind_param($stmt_aud, "sss", $usuario, $fecha, $accion_aud);
+                    mysqli_stmt_execute($stmt_aud);
+                    mysqli_stmt_close($stmt_aud);
                 } else {
                     echo "Error al actualizar la contraseña.";
                 }
@@ -55,3 +67,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['id_usuario'])) {
     echo "Acceso no autorizado.";
 }
 ?>
+

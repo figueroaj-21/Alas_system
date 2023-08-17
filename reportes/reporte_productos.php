@@ -64,12 +64,12 @@ $pdf->SetFillColor(255, 255, 255);
 
 // Recorrer los resultados y agregar los datos a la tabla
 while ($row_factura = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
-    $pdf->Cell(30, 10, $row_factura['codigo'], 0, 0, 'C', 1);
-    $pdf->Cell(40, 10, $row_factura['clasificacion'], 0, 0, 'C', 1);
-    $pdf->Cell(60, 10, $row_factura['descripcion'], 0, 0, 'C', 1);
-    $pdf->Cell(20, 10, $row_factura['costo'], 0, 0, 'C', 1);
-    $pdf->Cell(30, 10, $row_factura['existencia'], 0, 0, 'C', 1);
-    $pdf->Cell(60, 10, $row_factura['nombre_proveedor'], 0, 0, 'C', 1);
+    $pdf->Cell(30, 10, $row_factura['codigo'], 1, 0, 'C', 1);
+    $pdf->Cell(40, 10, $row_factura['clasificacion'], 1, 0, 'C', 1);
+    $pdf->Cell(60, 10, $row_factura['descripcion'], 1, 0, 'C', 1);
+    $pdf->Cell(20, 10, $row_factura['costo'], 1, 0, 'C', 1);
+    $pdf->Cell(30, 10, $row_factura['existencia'], 1, 0, 'C', 1);
+    $pdf->Cell(60, 10, $row_factura['nombre_proveedor'], 1, 0, 'C', 1);
     $pdf->Ln();
 }
 

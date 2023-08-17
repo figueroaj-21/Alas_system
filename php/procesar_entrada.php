@@ -8,18 +8,19 @@ $fecha_entrada = $_GET['fecha_entrada'];
 $cantidad_entrada = $_GET['cantidad_entrada'];
 $costo_producto = $_GET['costo_producto'];
 $id_producto = $_GET['id_producto'];
-$motivo_entrada = $_GET['motivo_entrada'];
 $descripcion = $_GET['descripcion'];
+$factura_compra = $_GET['factura_compra'];
 
 // Consulta de inserción con sentencia preparada
-$sql_insert_entrada = "INSERT INTO tbl_entrada (fecha_entrada, cantidad_entrada, costo_producto, id_producto)
-                       VALUES (?, ?, ?, ?)";
+$sql_insert_entrada = "INSERT INTO tbl_entrada (fecha_entrada, cantidad_entrada, costo_producto, factura_compra, id_producto)
+                       VALUES (?, ?, ?, ?, ?)";
 
 // Preparar la consulta de inserción
 $stmt_insert = mysqli_prepare($conexion, $sql_insert_entrada);
 
 // Vincular parámetros con los valores obtenidos de $_GET
-mysqli_stmt_bind_param($stmt_insert, "ssss", $fecha_entrada, $cantidad_entrada, $costo_producto, $id_producto);
+mysqli_stmt_bind_param($stmt_insert, "sdisi", $fecha_entrada, $cantidad_entrada, $costo_producto, $factura_compra, $id_producto);
+
 
 // Ejecutar la consulta de inserción
 if (mysqli_stmt_execute($stmt_insert)) {

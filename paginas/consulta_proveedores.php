@@ -122,7 +122,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
         <br>
         <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo Proveedor
         <i class="fa fa-plus"></i></a>
-        <a href="#" target="_blank" class="btn btn-danger">PDF
+        <a href="../reportes/reporte_proveedores.php" target="_blank" class="btn btn-danger">PDF
         <i class="fa-solid fa-file-lines"></i></a>
         <hr>
 

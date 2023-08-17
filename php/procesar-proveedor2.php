@@ -50,7 +50,7 @@ if ($resul) {
   mysqli_stmt_close($stmt);
 
   // Obtener la fecha actual
-  $fecha = date("Y-m-d H:i:s");
+  $fecha = date("Y-m-d");
 
   // Construir la consulta de inserción en tbl_auditoria
   $accion_aud = "El usuario [$usuario] registró al Proveedor [$nombre_proveedor]";
