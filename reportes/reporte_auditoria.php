@@ -54,7 +54,7 @@ $pdf->SetTextColor(255, 255, 255);
 $pdf->Cell(20, 10, 'ID', 1, 0, 'C', 1);
 $pdf->Cell(40, 10, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(60, 10, 'Fecha del Registro', 1, 0, 'C', 1);
-$pdf->Cell(140, 10, 'Acción', 1, 0, 'C', 1); // Ajustar ancho para el contenido con salto de línea
+$pdf->Cell(180, 10, 'Acción', 1, 0, 'C', 1); // Ajustar ancho para el contenido con salto de línea
 $pdf->Ln();
 
 $pdf->SetTextColor(0, 0, 0);
@@ -65,7 +65,7 @@ while ($row_factura = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
     $pdf->Cell(20, 10, $row_factura['id_auditoria'], 1, 0, 'C', 1);
     $pdf->Cell(40, 10, utf8_decode($row_factura['usuario_aud']), 1, 0, 'C', 1); // Convertir a ISO-8859-1
     $pdf->Cell(60, 10, utf8_decode($row_factura['tiemporegistro_aud']), 1, 0, 'C', 1); // Convertir a ISO-8859-1
-    $pdf->Cell(140, 10, utf8_decode($row_factura['accion_aud']), 1, 0, 'C', 1); // Convertir a ISO-8859-1 con salto de línea
+    $pdf->Cell(180, 10, utf8_decode($row_factura['accion_aud']), 1, 0, 'C', 1); // Convertir a ISO-8859-1 con salto de línea
     $pdf->Ln();
 }
 

@@ -113,9 +113,9 @@
     <img src="../img_ayuda/ConsultaProveedores.png" class="img-rounded" style="float:right; padding:10px;" width="550px" height="auto" alt="consulta_proveedores.png" />
     <p class="small">En esta página Consulta Proveedores el usuario tendrá acceso a la tabla donde están registrados todos los proveedores existentes, podrá observar en la misma el:RIF, Nombre del proveedor, Numero de contacto, persona de contacto y el Correo del proveedor.</p>
 
-    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar al proveedor por su: RIF, Nombre del proveedor, Numero de contacto, persona de contacto y el Correo del proveedor de la tabla proveedor, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
+    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar al proveedor por su: RIF, Nombre del proveedor, Número de contacto, persona de contacto y el Correo del proveedor de la tabla proveedor, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
 
-    <p class="small">La tabla posee un botón para “Nuevo Proveedor” donde al hacer click se desplegará el formulario “Registro Proveedor” en dicho formulario el usuario deberá ingresar RIF del proveedor, Nombre del proveedor, Numero de contacto, Persona de contato, Correo proveedor y el Estado del proveedor siendo todos los campos obligatorios, al lado del botón nuevo proveedor se haya el botón “PDF” este botón generara un reporte en formato PDF de la tabla proveedores que luego el usuario puede reimprimir o guardar en la nube.</p>
+    <p class="small">La tabla posee un botón para “Nuevo Proveedor” donde al hacer click se desplegará el formulario “Registro Proveedor” en dicho formulario el usuario deberá ingresar RIF del proveedor, Nombre del proveedor, Número de contacto, Persona de contato, Correo proveedor y el Estado del proveedor siendo todos los campos obligatorios, al lado del botón nuevo proveedor se haya el botón “PDF” este botón generara un reporte en formato PDF de la tabla proveedores que luego el usuario puede reimprimir o guardar en la nube.</p>
 
     <p class="small"><b>Acciones de la tabla Proveedores</b></p>
 
@@ -133,22 +133,22 @@
     <p><a href="#inicio">Ir al inicio de la p&aacute;gina</a></p>
     <a name="productos_en_stock_minimo"></a>
 
-    <p class="small"> En esta página Productos Bajo Stock Minimo el usuario tendrá acceso a la tabla donde están registrados todos los productos cuya existecia se encuentra por debajo de su stock minimo, podrá observar en la misma el: Codigo, Clasificacion, Descripcion, Costo, Existencia y Stock Minimo de cada producto.</p>
+    <p class="small"> En esta página Productos Bajo Stock Minimo el usuario tendrá acceso a la tabla donde están registrados todos los productos cuya existecia se encuentra por debajo de su stock minimo, podrá observar en la misma el: Código, Clasificacion, Descripcion, Costo, Existencia y Stock Minimo de cada producto.</p>
  
     <img src="../img_ayuda/productos_stock_minimo.png" class="img-rounded" style="float:right; padding:10px;" width="350px" height="auto" alt="productos_stock_minimo.png" />
 
-    <p class="small"> La tabla cuenta con un buscador donde el usuario puede buscar productos por su: Codigo, Clasificacion, Descripcion, Costo, Existencia y Stock Minimo, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
+    <p class="small"> La tabla cuenta con un buscador donde el usuario puede buscar productos por su: Código, Clasificación, Descripción, Costo, Existencia y Stock Mínimo, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
 
-    <p class="small"> El botón “PDF” generara un reporte en formato PDF de la tabla Productos Bajo Stock Minimo que luego el usuario puede reimprimir o guardar en la nube.</p>
+    <p class="small"> El botón “PDF” generara un reporte en formato PDF de la tabla Productos Bajo Stock Mínimo que luego el usuario puede reimprimir o guardar en la nube.</p>
 
 
     <h4>Reporte de Entradas por Periodo</h4>
     <p><a href="#inicio">Ir al inicio de la p&aacute;gina</a></p>
     <a name="entradas_por_periodo"></a>
 
-    <p class="small">En este apartado el usuario debera ingresar la fecha en la que quiere gnerar la consulta, desde XX/XX/XXXX hasta XX/XX/XXXX luego hacer click en el boton de "Generar Reporte" para generar el reporte deseado.</p>
+    <p class="small">En este apartado el usuario debera ingresar la fecha en la que quiere gnerar la consulta, desde XX/XX/XXXX hasta XX/XX/XXXX luego hacer click en el botón de "Generar Reporte" para generar el reporte deseado.</p>
 
-    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar productos por su: Codigo, Fecha de Entrada, Cantidad de Entrada y Numero de Factura, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla</p>
+    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar productos por su: Código, Fecha de Entrada, Cantidad de Entrada y Número de Factura, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla</p>
 
     <p class="small">El botón “PDF” generara un reporte en formato PDF de la tabla Entradas por Periodo que luego el usuario puede reimprimir o guardar en la nube.</p>
 
@@ -159,7 +159,7 @@
 
     <p class="small">En este apartado el usuario debera ingresar la fecha en la que quiere gnerar la consulta, desde XX/XX/XXXX hasta XX/XX/XXXX luego hacer click en el boton de "Generar Reporte" para generar el reporte deseado.</p>
 
-	<p class="small">La tabla cuenta con un buscador donde el usuario puede buscar productos por su: Codigo, Fecha de Salida, Cantidad de Salida y Numero de Factura, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla</p>
+	<p class="small">La tabla cuenta con un buscador donde el usuario puede buscar productos por su: Código, Fecha de Salida, Cantidad de Salida y Número de Factura, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla</p>
 
     <p class="small">El botón “PDF” generara un reporte en formato PDF de la tabla Salidas por Periodo que luego el usuario puede reimprimir o guardar en la nube.</p>
 
@@ -174,11 +174,11 @@
     <p><a href="#inicio">Ir al inicio de la p&aacute;gina</a></p>
     <a name="gestionar_usuarios"></a>
 
-    <p class="small"> En esta página Consulta Usuarios/Gestionar Usuarios el usuario tendrá acceso a la tabla donde están registrados todos los usuarios existentes, podrá observar en la misma el: ID, Usuario, Cedula, Nombre, Apellido, Correo, Direccion y Nivel de cada usuario registrado.</p>
+    <p class="small"> En esta página Consulta Usuarios/Gestionar Usuarios el usuario tendrá acceso a la tabla donde están registrados todos los usuarios existentes, podrá observar en la misma el: ID, Usuario, Cédula, Nombre, Apellido, Correo, Dirección y Nivel de cada usuario registrado.</p>
 
     <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar a otro usuario por su: colocar campos de la tabla usuarios, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
 
-    <p class="small">La tabla posee un botón para “Nuevo Usuario” donde al hacer click se desplegará el formulario “Registro Usuario” en dicho formulario el usuario deberá ingresar: Usuario, Clave, Cedula, Nombre, Apellido, Correo, Direccion, Nivel y Estado del usuario  siendo todos los campos obligatorios, al lado del botón nuevo usuario se haya el botón “PDF” este botón generara un reporte en formato PDF de la tabla usuarios que luego el usuario puede reimprimir o guardar en la nube.</p>
+    <p class="small">La tabla posee un botón para “Nuevo Usuario” donde al hacer click se desplegará el formulario “Registro Usuario” en dicho formulario el usuario deberá ingresar: Usuario, Clave, Cédula, Nombre, Apellido, Correo, Dirección, Nivel y Estado del usuario  siendo todos los campos obligatorios, al lado del botón nuevo usuario se haya el botón “PDF” este botón generara un reporte en formato PDF de la tabla usuarios que luego el usuario puede reimprimir o guardar en la nube.</p>
 
     <img src="../img_ayuda/GestionarUsuario.png" class="img-rounded" style="float:left; padding:10px;" width="450px" height="auto" alt="gestionar_usuarios.png" />
     <p class="small"><b>Acciones de la tabla Consulta Usuarios</b></p>
@@ -207,7 +207,7 @@
     <a name="respaldar_basedatos"></a>
 
     <img src="../img_ayuda/RespaldarBaseDeDatos.png" class="img-rounded" style="float:right; padding:10px;" width="450px" height="auto" alt="respaldo_de_la_base_de_datos.png" />
-    <p class="small"> En esta página el usuario puede respaldar la base de datos haciendo click en el boton "Respaldar Base de Datos" de igual forma puede restaurar la misma desplegando el campo, ecoger la ultima opcion guardada y haciendo click en el boton "Restaurar" para cargar la base de datos, al mismo tiempo la pagina posee un boton "volver a Home" para regresar a la pagina de inicio.</p>
+    <p class="small"> En esta página el usuario puede respaldar la base de datos haciendo click en el botón "Respaldar Base de Datos" de igual forma puede restaurar la misma desplegando el campo, ecoger la última opcion guardada y haciendo click en el botón "Restaurar" para cargar la base de datos, al mismo tiempo la página posee un botón "volver a Home" para regresar a la página de inicio.</p>
     <br>
     <br>
     <br>
@@ -217,11 +217,11 @@
     <a name="bitacora"></a>
 
     <img src="../img_ayuda/BitacoraDelSistema.png" class="img-rounded" style="float:left; padding:10px;" width="350px" height="auto" alt="item_nueva_entrada.png" />
-    <p class="small">En esta pagina se encuentra la Bitacora del sistema, en esta tabla se documenta cada acción realizada por el usuario o administrador, identificándolo y dejando un registro detallado de cada acción realizada sin excepción.</p>
+    <p class="small">En esta página se encuentra la Bitácora del sistema, en esta tabla se documenta cada acción realizada por el usuario o administrador, identificándolo y dejando un registro detallado de cada acción realizada sin excepción.</p>
 
-    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar a otro usuario por su: ID de la auditoria, Usuario, Fecha y Accion efectuada, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
+    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar a otro usuario por su: ID de la auditoria, Usuario, Fecha y Acción efectuada, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
 
-    <p class="small">El botón “PDF” generara un reporte en formato PDF de la tabla Bitacora del Sistema que luego el usuario puede reimprimir o guardar en la nube.</p>
+    <p class="small">El botón “PDF” generara un reporte en formato PDF de la tabla Bitácora del Sistema que luego el usuario puede reimprimir o guardar en la nube.</p>
 </div>
 
 <div class="container" style="margin-top: 110px;">
@@ -234,7 +234,7 @@
 
     <p class="small">En esta página Productos Inhabilitados el usuario tendrá acceso a la tabla donde se encuentran todos los productos que han sido inhabilitados, podrá observar en la misma el: ID, Codigo, Clasificacion, Descripcion, Observaciones, Costo, Existencia, Stock Minimo y Proveedor de la tabla productos inhabilitados.</p>
 
-    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar un producto inhabilitado por su: ID, Codigo, Clasificacion, Descripcion, Observaciones, Costo, Existencia, Stock Minimo y Proveedor de la tabla poductos inhabilitados, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
+    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar un producto inhabilitado por su: ID, Código, Clasificación, Descripción, Observaciones, Costo, Existencia, Stock Mínimo y Proveedor de la tabla poductos inhabilitados, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
 
     <p class="small">El botón “PDF” generara un reporte en formato PDF de la tabla Productos Inhabilitados que luego el usuario puede reimprimir o guardar en la nube.</p>
 
@@ -247,9 +247,9 @@
     <h4>Proveedores Inhabilitados</h4>
    	<a name="proveedores_inhablitados"></a>
 
-    <p class="small">En esta página Proveedores Inhabilitados el usuario tendrá acceso a la tabla donde se encuentran todos los proveedores que han sido inhabilitados, podrá observar en la misma el: RIF, Nombre, Numero de Contacto, Persona de Contacto y Correo de los proveedores de la tabla proveedores inhabilitados.</p>
+    <p class="small">En esta página Proveedores Inhabilitados el usuario tendrá acceso a la tabla donde se encuentran todos los proveedores que han sido inhabilitados, podrá observar en la misma el: RIF, Nombre, Número de Contacto, Persona de Contacto y Correo de los proveedores de la tabla proveedores inhabilitados.</p>
 
-    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar al proveedor inhabilitado por su: RIF, Nombre, Numero de Contacto, Persona de Contacto y Correo de los proveedores de la tabla proveedores inhabilitados, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
+    <p class="small">La tabla cuenta con un buscador donde el usuario puede buscar al proveedor inhabilitado por su: RIF, Nombre, Número de Contacto, Persona de Contacto y Correo de los proveedores de la tabla proveedores inhabilitados, un botón para mostrar el número de filas que desea ver en la tabla, botones de "siguiente" o "anterior" para deslizarse por cada una de las páginas de la tabla y unas flechas que pueden ordenar de forma alfabética ascendente o descendente según los campos de la tabla.</p>
 
     <p class="small">El botón “PDF” generara un reporte en formato PDF de la tabla Proveedores Inhabilitados que luego el usuario puede reimprimir o guardar en la nube.</p>
 

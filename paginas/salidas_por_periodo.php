@@ -9,7 +9,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Home</title>
+  <title>Salidas por periodo</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">

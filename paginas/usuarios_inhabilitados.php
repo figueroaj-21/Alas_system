@@ -172,7 +172,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_izq"><?php echo $row_factura['correo_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['direccion_usuario']; ?></td>
                             <td class="fila_datos texto_izq">
-                            <a class="btn btn-outline-danger" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["login_usuario"]; ?>" onclick="inhabilitarUsuario(<?php echo $row_factura['id_usuario']; ?>)">
+                            <a class="btn btn-outline-danger" href="#" title="Habilitar el usuario <?php echo $row_factura["login_usuario"]; ?>" onclick="inhabilitarUsuario(<?php echo $row_factura['id_usuario']; ?>)">
                             	<i class="fa-solid fa-user-lock"></i></a>
                             </td>
                         </tr>

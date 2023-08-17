@@ -20,12 +20,10 @@ $resultado = mysqli_query($conexion, $sql_reporte);
 mysqli_close($conexion);
 ?>
 
-
-?>
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Home</title>
+  <title>Reporte de entradas por periodo</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">

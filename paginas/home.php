@@ -179,7 +179,7 @@ $num_reg = mysqli_num_rows($rcs_facturas);
                             <i class="fa-regular fa-square-minus"></i> 
                             </a>
                             <?php if($nivel_usuario==2){ ?>
-                            <a class="btn btn-outline-warning" href="form_editar_producto.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Actualiza el registo <?php echo $row_factura["descripcion"]; ?>"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a class="btn btn-outline-warning" href="form_editar_producto.php?id_producto=<?php echo $row_factura['id_producto']; ?>" title="Edita el registo <?php echo $row_factura["descripcion"]; ?>"><i class="fa-regular fa-pen-to-square"></i></a>
                             <a class="btn btn-outline-dark" href="#" title="Inhabilita el registro <?php echo $row_factura["descripcion"]; ?>" onclick="inhabilitarProducto(<?php echo $row_factura['id_producto']; ?>)">
                             <i class="fa-solid fa-ban"></i>
                             </a> 

@@ -176,8 +176,8 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_izq"><?php echo $row_factura['correo_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['direccion_usuario']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['nivel_usuario']; ?></td>
-                            <td class="fila_datos texto_izq"><a class="btn btn-outline-info" href="form_editar_usuario.php?id_usuario=<?php echo $row_factura['id_usuario']; ?>"><i class="fa-solid fa-user-pen"></i></a>
-                            <a class="btn btn-outline-danger" href="#" title="Habilitar/Inhabilita el registro <?php echo $row_factura["login_usuario"]; ?>" onclick="inhabilitarUsuario(<?php echo $row_factura['id_usuario']; ?>)"><i class="fa-solid fa-user-lock"></i></a>
+                            <td class="fila_datos texto_izq"><a class="btn btn-outline-info" href="form_editar_usuario.php?id_usuario=<?php echo $row_factura['id_usuario']; ?>" title="Edita el usuario <?php echo $row_factura["login_usuario"]; ?>"><i class="fa-solid fa-user-pen"></i></a>
+                            <a class="btn btn-outline-danger" href="#" title="Inhabilita el usuario <?php echo $row_factura["login_usuario"]; ?>" onclick="inhabilitarUsuario(<?php echo $row_factura['id_usuario']; ?>)"><i class="fa-solid fa-user-lock"></i></a>
                             </td>
                         </tr>
                         <?php

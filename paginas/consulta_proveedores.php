@@ -166,7 +166,7 @@ $muestra_tabla = ($num_reg > 0) ? true : false;
                             <td class="fila_datos texto_der"><?php echo $row_factura['numero_contacto']; ?></td>
                             <td class="fila_datos texto_cen"><?php echo $row_factura['persona_contacto']; ?></td>
                             <td class="fila_datos texto_izq"><?php echo $row_factura['correo_proveedor']; ?></td>
-                            <td class="fila_datos texto_izq"><a class="btn btn-outline-info" href="editar_user.php?id=<?php echo $fila['id']?> "><i class="fa-solid fa-user-pen"></i></a>
+                            <td class="fila_datos texto_izq"><a class="btn btn-outline-info" href="form_editar_proveedor.php?id_proveedor=<?php echo $row_factura['id_proveedor']?>" title="Edita el proveedor <?php echo $row_factura["nombre_proveedor"]; ?>"><i class="fa-solid fa-user-pen"></i></a>
                             <a class="btn btn-outline-danger" href="#" title="Inhabilita el registro <?php echo $row_factura["nombre_proveedor"]; ?>" onclick="inhabilitarProveedor(<?php echo $row_factura['id_proveedor']; ?>)">
                             <i class="fa-solid fa-user-large-slash"></i></a>
                             </td>

@@ -1,10 +1,10 @@
-<?php require "../php/seguridad.php"; 
-require "../php/conexion.php";
+<?php require "../php/seguridad.php";  
+  require "../php/conexion.php";
   $nombre_usuario = $_SESSION['nombre_usuario'];
   $apellido_usuario = $_SESSION['apellido_usuario'];
   $login_usuario = $_SESSION['login_usuario'];
   $nivel_usuario = $_SESSION['nivel_usuario'];
-
+  
 // Obtener el rango de fechas del formulario
 $fecha_inicio = $_POST['fecha_inicio'];
 $fecha_fin = $_POST['fecha_fin'];
@@ -18,83 +18,29 @@ $resultado = mysqli_query($conexion, $sql_reporte);
 
 // Cerrar la conexión
 mysqli_close($conexion);
-?>
 
+?>
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Reporte de Salidas por Periodo</title>
+  <title>Reporte de salidas por periodo</title>
   <link rel="shortcut icon" type="image/x-icon" href="../img/logoalas.ico" />
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Enlaces a Bootstrap web-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <!-- Botones -->
+    <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
 
-  <script src="https://kit.fontawesome.com/068315295f.js" crossorigin="anonymous"></script>
 
-  <!-- Enlace a DataTables CSS y JS -->
-    <link rel="stylesheet" href="./datatables.min.css" />
-    <script src="./datatables.min.js"></script>
-
-  <!-- Invoca y Traduce al metodo DataTable() -->
-    <script>
-      $(function () {
-        $("#reporteSalidasPeriodos").DataTable({
-          language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ registros",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla =(",
-            sInfo:
-              "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            sInfoEmpty:
-              "Mostrando registros del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sInfoPostFix: "",
-            sSearch: "Buscar:",
-            sUrl: "",
-            sInfoThousands: ",",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-              sFirst: "Primero",
-              sLast: "Último",
-              sNext: "Siguiente",
-              sPrevious: "Anterior",
-            },
-            oAria: {
-              sSortAscending:
-                ": Activar para ordenar la columna de manera ascendente",
-              sSortDescending:
-                ": Activar para ordenar la columna de manera descendente",
-            },
-            buttons: {
-              copy: "Copiar",
-              colvis: "Visibilidad",
-            },
-            decimal: ",",
-            thousands: ".",
-          },
-          lengthMenu: [
-            [10, 20, 30, 50, -1],
-            [10, 20, 30, 50, "Todos"],
-          ],
-        });
-      });
-    </script>
-
-    <style>
-      div.container {
-        margin-top: 80px;
-        max-width: 1200px;
-      }
-    </style>
+    <!-- Enlace a Bootstrap web-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
-<body> 
+<body>
+
   <?php require "../html/nav2.html"; ?>
-  <br>
+<br>
   <div class="container mt-5">
     <h2>Reporte de Salidas por Periodo</h2>
     <br>
@@ -145,10 +91,5 @@ mysqli_close($conexion);
     <?php } ?>
   </div>
 
-  <!-- Inicializar la DataTable -->
-
-
-  <!-- Scripts de Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
