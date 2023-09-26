@@ -25,12 +25,24 @@ $direccion_usuario = validarDatos($_POST["direccion_usuario"]);
 $nivel_usuario = validarDatos($_POST["nivel_usuario"]);
 $estado_usuario = validarDatos($_POST["estado_usuario"]);
 
-// Verifica si el usuario ya está registrado
+// Verifica si el usuario ya existe
+$verificar_usuario = mysqli_query($conexion, "SELECT * FROM tbl_usuarios WHERE login_usuario = '$login_usuario'");
+if (mysqli_num_rows($verificar_usuario) > 0) {
+  echo '
+    <script>
+      alert("Este nombre de usuario ya existe en la Base de Datos");
+      window.location = "../paginas/consulta_usuarios.php";
+    </script>';
+  mysqli_close($conexion);
+  exit();
+}
+
+// Verifica si el número de cédula ya está registrado
 $verificar_cedula = mysqli_query($conexion, "SELECT * FROM tbl_usuarios WHERE cedula_usuario = '$cedula_usuario'");
 if (mysqli_num_rows($verificar_cedula) > 0) {
   echo '
     <script>
-      alert("Este usuario ya se encuentra registrado");
+      alert("Este número de cédula ya se encuentra registrado");
       window.location = "../paginas/consulta_usuarios.php";
     </script>';
   mysqli_close($conexion);
